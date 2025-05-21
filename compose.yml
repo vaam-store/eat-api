@@ -1,0 +1,152 @@
+services:
+  meilisearch:
+    image: getmeili/meilisearch
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 50M
+    environment:
+      - MEILI_MASTER_KEY=${MEILI_MASTER_KEY:-F39J9hiEOCKv-hxeZvPp2IV05GkXZihs_Hqqhl-ZAcA}
+      - MEILI_NO_ANALYTICS=${MEILI_NO_ANALYTICS:-true}
+      - MEILI_ENV=${MEILI_ENV:-development}
+      - MEILI_LOG_LEVEL=${MEILI_LOG_LEVEL:-info}
+      - MEILI_DB_PATH=${MEILI_DB_PATH:-/data}
+    ports:
+      - ${MEILI_PORT:-7700}:7700
+      - ${MEILI_UPDATE_PORT:-7701}:7701
+    volumes:
+      - ms:/data
+
+  postgres:
+    image: postgres
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 500M
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-vaam-eat}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-vaam-eat-password}
+      POSTGRES_DB: ${POSTGRES_DB:-vaam-eat}
+    volumes:
+      - db:/var/lib/postgresql/data
+    ports:
+      - ${POSTGRES_PORT:-5432}:5432
+
+  redis:
+    image: redis
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 50M
+    volumes:
+      - redis:/data
+    ports:
+      - ${REDIS_PORT:-6379}:6379
+
+  adminer:
+    image: adminer
+    deploy:
+      resources:
+        limits:
+          cpus: '0.05'
+          memory: 50M
+    ports:
+      - ${ADMINER_PORT:-18080}:8080
+    environment:
+      ADMINER_DEFAULT_SERVER: postgres
+      ADMINER_DEFAULT_USERNAME: ${POSTGRES_USER:-vaam-eat}
+      ADMINER_DEFAULT_PASSWORD: ${POSTGRES_PASSWORD:-vaam-eat-password}
+      ADMINER_DESIGN: ${ADMINER_DESIGN:-dracula}
+      ADMINER_PLUGINS: ${ADMINER_PLUGINS:-tables-filter tinymce}
+
+  minio:
+    image: bitnami/minio:latest
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 500M
+    volumes:
+      - minio:/bitnami/minio/data
+    ports:
+      - ${MINIO_PORT:-19000}:9000
+      - ${MINIO_PORT_INTERNAL:-9001}:9001
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER:-minio}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:-minio123}
+      MINIO_BROWSER_SESSION_DURATION: ${MINIO_BROWSER_SESSION_DURATION:-7d}
+      MINIO_BROWSER_LOGIN_ANIMATION: ${MINIO_BROWSER_LOGIN_ANIMATION:-off}
+
+  api:
+    build:
+      dockerfile: Dockerfile
+      target: api
+    depends_on:
+      - postgres
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 250M
+    ports:
+      - "16000:16000"
+    environment:
+      #USE_CLUSTER: 1
+      LOG_LEVEL: error
+      MEDUSA_WORKER_MODE: server
+
+      REDIS_URL: redis://redis:6379
+
+      DATABASE_URL: postgres://vaam-eat:vaam-eat-password@postgres:5432/vaam-eat?ssl_mode=disable
+
+      STOREFRONT_URL: http://localhost:3000
+      STORE_CORS: "/http:\\/\\/*/"
+      ADMIN_CORS: "/http:\\/\\/*/"
+      AUTH_CORS: "/http:\\/\\/*/"
+
+      JWT_SECRET: some-secret-key
+      COOKIE_SECRET: some-secret-key
+      SESSION_NAME: local.vaam-eat-session.sid
+      ROLLING_SESSION: 'true'
+
+      MINIO_ENDPOINT: http://minio:9000
+      MINIO_CDN_URL: http://localhost:19000
+      MINIO_BUCKET: vaam-eat
+      MINIO_PRIVATE_BUCKET: vaam-eat-private
+      MINIO_ACCESS_KEY: minio
+      MINIO_SECRET_KEY: minio123
+
+      STRIPE_API_KEY: sk_test_51J4J
+
+      MEILISEARCH_HOST: "http://localhost:7700"
+      MEILISEARCH_API_KEY: "F39J9hiEOCKv-hxeZvPp2IV05GkXZihs_Hqqhl-ZAcA"
+
+      WEBAUTHN_RP_ID: "localhost"
+      WEBAUTHN_RP_NAME: "Medusa Store"
+      WEBAUTHN_ORIGIN: "http://localhost:9000"
+
+  admin:
+    deploy:
+      resources:
+        limits:
+          cpus: '0.05'
+          memory: 50M
+    build:
+      context: ./apps/backend
+      dockerfile: Dockerfile
+      target: admin
+      args:
+        - BACKEND_URL=http://localhost:16000
+    ports:
+      - "16001:80"
+
+volumes:
+  db: { }
+  ms: { }
+  redis: { }
+  minio: { }
+  postgres-data: { }
+  spi-theme: { }
