@@ -124,10 +124,6 @@ services:
       MEILISEARCH_HOST: "http://localhost:7700"
       MEILISEARCH_API_KEY: "F39J9hiEOCKv-hxeZvPp2IV05GkXZihs_Hqqhl-ZAcA"
 
-      WEBAUTHN_RP_ID: "localhost"
-      WEBAUTHN_RP_NAME: "Medusa Store"
-      WEBAUTHN_ORIGIN: "http://localhost:9000"
-
   admin:
     deploy:
       resources:
@@ -135,7 +131,6 @@ services:
           cpus: '0.05'
           memory: 50M
     build:
-      context: ./apps/backend
       dockerfile: Dockerfile
       target: admin
       args:
