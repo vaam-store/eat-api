@@ -23,6 +23,9 @@ module.exports = defineConfig({
 
 					return {
 						...config,
+						optimizeDeps: {
+							include: ["qs"],
+						},
 						plugins: config.plugins.concat([
 							legacy({
 								targets: ["defaults", "not IE 11"],
@@ -70,9 +73,18 @@ module.exports = defineConfig({
 						},
 					};
 				}
-				: undefined,
+				: (config) => ({
+					...config,
+					optimizeDeps: {
+						include: ["qs"],
+					},
+				}),
 	},
 	plugins: [
+		{
+			resolve: "medusa-wishlist-plugin",
+			options: {},
+		},
 		{
 			resolve: "@vymalo/medusa-meilisearch",
 			options: {},

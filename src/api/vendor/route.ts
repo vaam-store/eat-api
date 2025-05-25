@@ -4,7 +4,6 @@ import type {
 } from "@medusajs/framework/http";
 import { MedusaError } from "@medusajs/framework/utils";
 import createVendorWorkflow from "../../workflows/create-vendor";
-import deleteVendorWorkflow from "../../workflows/delete-vendor";
 
 type RequestBody = {
 	username: string;
@@ -16,7 +15,7 @@ export async function POST(
 ) {
 	// If `actor_id` is present, the request carries
 	// authentication for an existing vendor
-	if (req.auth_context.actor_id) {
+	if (req.auth_context?.actor_id) {
 		throw new MedusaError(
 			MedusaError.Types.INVALID_DATA,
 			"Request already authenticated as a vendor.",

@@ -257,15 +257,10 @@ export default async function seedDemoData({ container }: ExecArgs) {
 
 	logger.info("Seeding publishable API key data...");
 	const {
-		result: [secretApiKey, publishableApiKey],
+		result: [publishableApiKey],
 	} = await createApiKeysWorkflow(container).run({
 		input: {
 			api_keys: [
-				{
-					title: "NextJS API",
-					type: "secret",
-					created_by: "",
-				},
 				{
 					title: "Client Key",
 					type: "publishable",
@@ -275,12 +270,6 @@ export default async function seedDemoData({ container }: ExecArgs) {
 		},
 	});
 
-	await linkSalesChannelsToApiKeyWorkflow(container).run({
-		input: {
-			id: secretApiKey.id,
-			add: [defaultSalesChannel.id],
-		},
-	});
 	await linkSalesChannelsToApiKeyWorkflow(container).run({
 		input: {
 			id: publishableApiKey.id,
