@@ -16,21 +16,13 @@ export const POST = async (
 		);
 	}
 
-	try {
-		const { result } = await createRegistrationOptionsWorkflow(req.scope).run({
-			input: {
-				authIdentityId: req.auth_context.auth_identity_id,
-			},
-		});
+	const { result } = await createRegistrationOptionsWorkflow(req.scope).run({
+		input: {
+			authIdentityId: req.auth_context.auth_identity_id,
+		},
+	});
 
-		res.json({
-			options: result,
-		});
-	} catch (e) {
-		console.error('miaou =>', e);
-
-		res.status(400).send({
-			e,
-		});
-	}
+	res.json({
+		options: result,
+	});
 };

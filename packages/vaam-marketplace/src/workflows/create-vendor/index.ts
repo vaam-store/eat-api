@@ -9,6 +9,7 @@ import {
 } from '@medusajs/medusa/core-flows';
 import createVendorStep from './steps/create-vendor';
 import createVendorAdminStep from './steps/create-vendor-admin';
+import type { Vendor } from '../../modules/marketplace/models/vendor';
 
 export type CreateVendorWorkflowInput = {
 	name: string;
@@ -61,7 +62,7 @@ const createVendorWorkflow = createWorkflow(
 		});
 
 		return new WorkflowResponse({
-			vendor: vendorWithAdmin[0],
+			vendor: vendorWithAdmin[0] as Vendor,
 		});
 	},
 );
