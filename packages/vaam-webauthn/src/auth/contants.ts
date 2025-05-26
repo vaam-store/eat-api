@@ -1,1 +1,1 @@
-export const WebAuthnAuth_ID = "webauthn";
+export const WebAuthnAuth_ID = 'webauthn';

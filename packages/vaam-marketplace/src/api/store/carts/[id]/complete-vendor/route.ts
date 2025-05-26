@@ -1,8 +1,8 @@
 import type {
 	AuthenticatedMedusaRequest,
 	MedusaResponse,
-} from "@medusajs/framework";
-import createVendorOrdersWorkflow from "../../../../../workflows/create-vendor-orders/index";
+} from '@medusajs/framework';
+import createVendorOrdersWorkflow from '../../../../../workflows/create-vendor-orders/index';
 
 export const POST = async (
 	req: AuthenticatedMedusaRequest,
@@ -17,7 +17,7 @@ export const POST = async (
 	});
 
 	res.json({
-		type: "order",
+		type: 'order',
 		order: result.parent_order,
 	});
 };

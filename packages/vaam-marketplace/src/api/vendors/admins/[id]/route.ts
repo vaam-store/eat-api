@@ -1,8 +1,8 @@
 import type {
 	AuthenticatedMedusaRequest,
 	MedusaResponse,
-} from "@medusajs/framework/http";
-import { deleteVendorAdminWorkflow } from "../../../../workflows/delete-vendor-admin/index";
+} from '@medusajs/framework/http';
+import { deleteVendorAdminWorkflow } from '../../../../workflows/delete-vendor-admin/index';
 
 export const DELETE = async (
 	req: AuthenticatedMedusaRequest,
@@ -14,5 +14,5 @@ export const DELETE = async (
 		},
 	});
 
-	res.json({ message: "success" });
+	res.json({ message: 'success' });
 };

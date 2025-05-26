@@ -1,6 +1,6 @@
-import type { InferTypeOf } from "@medusajs/framework/types";
-import { createStep } from "@medusajs/framework/workflows-sdk";
-import type { Wishlist } from "../../modules/wishlist/models/wishlist";
+import type { InferTypeOf } from '@medusajs/framework/types';
+import { createStep } from '@medusajs/framework/workflows-sdk';
+import type { Wishlist } from '../../modules/wishlist/models/wishlist';
 
 type ValidateWishlistSalesChannelStepInput = {
 	wishlist: InferTypeOf<typeof Wishlist>;
@@ -8,12 +8,12 @@ type ValidateWishlistSalesChannelStepInput = {
 };
 
 export const validateWishlistSalesChannelStep = createStep(
-	"validate-wishlist-sales-channel",
+	'validate-wishlist-sales-channel',
 	async (input: ValidateWishlistSalesChannelStepInput, { container }) => {
 		const { wishlist, sales_channel_id } = input;
 
 		if (wishlist.sales_channel_id !== sales_channel_id) {
-			throw new Error("Wishlist does not belong to the current sales channel");
+			throw new Error('Wishlist does not belong to the current sales channel');
 		}
 	},
 );

@@ -1,6 +1,6 @@
-import { StepResponse, createStep } from "@medusajs/framework/workflows-sdk";
-import type { RegistrationResponseJSON } from "@simplewebauthn/types";
-import WebAuthnApiService from "../../../modules/webauthn-api/service";
+import { StepResponse, createStep } from '@medusajs/framework/workflows-sdk';
+import type { RegistrationResponseJSON } from '@simplewebauthn/types';
+import WebAuthnApiService from '../../../modules/webauthn-api/service';
 
 export type ValidateRegistrationOptionsStepInput = {
 	payload: RegistrationResponseJSON;
@@ -8,12 +8,12 @@ export type ValidateRegistrationOptionsStepInput = {
 };
 
 const validateRegistrationOptionsStep = createStep(
-	"validate-registration-options",
+	'validate-registration-options',
 	async (
 		{ authIdentityId, payload }: ValidateRegistrationOptionsStepInput,
 		{ container },
 	) => {
-		const authService = container.resolve("auth");
+		const authService = container.resolve('auth');
 		const webauthnApiService: WebAuthnApiService = container.resolve(
 			WebAuthnApiService.identifier,
 		);

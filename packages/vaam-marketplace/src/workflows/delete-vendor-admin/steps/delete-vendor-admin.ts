@@ -1,10 +1,10 @@
-import { StepResponse, createStep } from "@medusajs/framework/workflows-sdk";
-import type { DeleteVendorAdminWorkflow } from "..";
-import { MARKETPLACE_MODULE } from "../../../modules/marketplace";
-import type MarketplaceModuleService from "../../../modules/marketplace/service";
+import { StepResponse, createStep } from '@medusajs/framework/workflows-sdk';
+import type { DeleteVendorAdminWorkflow } from '..';
+import { MARKETPLACE_MODULE } from '../../../modules/marketplace';
+import type MarketplaceModuleService from '../../../modules/marketplace/service';
 
 const deleteVendorAdminStep = createStep(
-	"delete-vendor-admin-step",
+	'delete-vendor-admin-step',
 	async ({ id }: DeleteVendorAdminWorkflow, { container }) => {
 		const marketplaceModuleService: MarketplaceModuleService =
 			container.resolve(MARKETPLACE_MODULE);

@@ -1,6 +1,6 @@
-import { StepResponse, createStep } from "@medusajs/framework/workflows-sdk";
-import { MARKETPLACE_MODULE } from "../../../modules/marketplace";
-import type MarketplaceModuleService from "../../../modules/marketplace/service";
+import { StepResponse, createStep } from '@medusajs/framework/workflows-sdk';
+import { MARKETPLACE_MODULE } from '../../../modules/marketplace';
+import type MarketplaceModuleService from '../../../modules/marketplace/service';
 
 type CreateVendorStepInput = {
 	name: string;
@@ -9,7 +9,7 @@ type CreateVendorStepInput = {
 };
 
 const createVendorStep = createStep(
-	"create-vendor",
+	'create-vendor',
 	async (vendorData: CreateVendorStepInput, { container }) => {
 		const marketplaceModuleService: MarketplaceModuleService =
 			container.resolve(MARKETPLACE_MODULE);

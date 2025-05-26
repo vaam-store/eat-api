@@ -1,11 +1,11 @@
-import { defineWidgetConfig } from "@medusajs/admin-sdk";
+import { defineWidgetConfig } from '@medusajs/admin-sdk';
 import type {
 	AdminProduct,
 	DetailWidgetProps,
-} from "@medusajs/framework/types";
-import { Container, Heading, Text } from "@medusajs/ui";
-import { useQuery } from "@tanstack/react-query";
-import { sdk } from "../lib/sdk";
+} from '@medusajs/framework/types';
+import { Container, Heading, Text } from '@medusajs/ui';
+import { useQuery } from '@tanstack/react-query';
+import { sdk } from '../lib/sdk';
 
 type WishlistResponse = {
 	count: number;
@@ -14,7 +14,7 @@ type WishlistResponse = {
 const ProductWidget = ({ data: product }: DetailWidgetProps<AdminProduct>) => {
 	const { data, isLoading } = useQuery<WishlistResponse>({
 		queryFn: () => sdk.client.fetch(`/admin/products/${product.id}/wishlist`),
-		queryKey: [["products", product.id, "wishlist"]],
+		queryKey: [['products', product.id, 'wishlist']],
 	});
 
 	return (
@@ -24,7 +24,7 @@ const ProductWidget = ({ data: product }: DetailWidgetProps<AdminProduct>) => {
 			</div>
 			<Text className="px-6 py-4">
 				{isLoading
-					? "Loading..."
+					? 'Loading...'
 					: `This product is in ${data?.count} wishlist(s).`}
 			</Text>
 		</Container>
@@ -32,7 +32,7 @@ const ProductWidget = ({ data: product }: DetailWidgetProps<AdminProduct>) => {
 };
 
 export const config = defineWidgetConfig({
-	zone: "product.details.before",
+	zone: 'product.details.before',
 });
 
 export default ProductWidget;

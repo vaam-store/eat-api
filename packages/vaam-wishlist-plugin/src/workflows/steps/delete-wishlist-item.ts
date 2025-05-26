@@ -1,13 +1,13 @@
-import { StepResponse, createStep } from "@medusajs/framework/workflows-sdk";
-import { WISHLIST_MODULE } from "../../modules/wishlist";
-import type WishlistModuleService from "../../modules/wishlist/service";
+import { StepResponse, createStep } from '@medusajs/framework/workflows-sdk';
+import { WISHLIST_MODULE } from '../../modules/wishlist';
+import type WishlistModuleService from '../../modules/wishlist/service';
 
 type DeleteWishlistItemStepInput = {
 	wishlist_item_id: string;
 };
 
 export const deleteWishlistItemStep = createStep(
-	"delete-wishlist-item",
+	'delete-wishlist-item',
 	async ({ wishlist_item_id }: DeleteWishlistItemStepInput, { container }) => {
 		const wishlistModuleService: WishlistModuleService =
 			container.resolve(WISHLIST_MODULE);

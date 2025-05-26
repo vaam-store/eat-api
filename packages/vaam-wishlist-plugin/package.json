@@ -9,9 +9,7 @@
 		"directory": "wishlist-plugin"
 	},
 	"license": "MIT",
-	"files": [
-		".medusa/server"
-	],
+	"files": [".medusa/server"],
 	"exports": {
 		"./package.json": "./package.json",
 		"./workflows": "./.medusa/server/src/workflows/index.js",
@@ -25,11 +23,7 @@
 			"default": "./.medusa/server/src/admin/index.js"
 		}
 	},
-	"keywords": [
-		"medusa-v2",
-		"plugin",
-		"medusa-plugin-other"
-	],
+	"keywords": ["medusa-v2", "plugin", "medusa-plugin-other"],
 	"scripts": {
 		"build": "medusa plugin:build",
 		"dev": "medusa plugin:develop",

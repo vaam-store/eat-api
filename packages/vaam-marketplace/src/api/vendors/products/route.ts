@@ -1,10 +1,10 @@
 import type {
 	AuthenticatedMedusaRequest,
 	MedusaResponse,
-} from "@medusajs/framework/http";
-import type { HttpTypes } from "@medusajs/framework/types";
-import { ContainerRegistrationKeys } from "@medusajs/framework/utils";
-import createVendorProductWorkflow from "../../../workflows/create-vendor-product/index";
+} from '@medusajs/framework/http';
+import type { HttpTypes } from '@medusajs/framework/types';
+import { ContainerRegistrationKeys } from '@medusajs/framework/utils';
+import createVendorProductWorkflow from '../../../workflows/create-vendor-product/index';
 
 export const GET = async (
 	req: AuthenticatedMedusaRequest,
@@ -15,8 +15,8 @@ export const GET = async (
 	const {
 		data: [vendorAdmin],
 	} = await query.graph({
-		entity: "vendor_admin",
-		fields: ["vendor.products.*"],
+		entity: 'vendor_admin',
+		fields: ['vendor.products.*'],
 		filters: {
 			id: [
 				// ID of the authenticated vendor admin

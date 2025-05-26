@@ -1,12 +1,12 @@
 import type {
 	AuthenticatedMedusaRequest,
 	MedusaResponse,
-} from "@medusajs/framework/http";
-import { MedusaError } from "@medusajs/framework/utils";
-import { z } from "zod";
+} from '@medusajs/framework/http';
+import { MedusaError } from '@medusajs/framework/utils';
+import { z } from 'zod';
 import createVendorWorkflow, {
 	type CreateVendorWorkflowInput,
-} from "../../workflows/create-vendor/index";
+} from '../../workflows/create-vendor/index';
 
 export const PostVendorCreateSchema = z
 	.object({
@@ -34,7 +34,7 @@ export const POST = async (
 	if (req.auth_context?.actor_id) {
 		throw new MedusaError(
 			MedusaError.Types.INVALID_DATA,
-			"Request already authenticated as a vendor.",
+			'Request already authenticated as a vendor.',
 		);
 	}
 

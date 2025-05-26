@@ -2,13 +2,13 @@ import {
 	WorkflowResponse,
 	createWorkflow,
 	transform,
-} from "@medusajs/framework/workflows-sdk";
+} from '@medusajs/framework/workflows-sdk';
 import {
 	setAuthAppMetadataStep,
 	useQueryGraphStep,
-} from "@medusajs/medusa/core-flows";
-import createVendorStep from "./steps/create-vendor";
-import createVendorAdminStep from "./steps/create-vendor-admin";
+} from '@medusajs/medusa/core-flows';
+import createVendorStep from './steps/create-vendor';
+import createVendorAdminStep from './steps/create-vendor-admin';
 
 export type CreateVendorWorkflowInput = {
 	name: string;
@@ -23,7 +23,7 @@ export type CreateVendorWorkflowInput = {
 };
 
 const createVendorWorkflow = createWorkflow(
-	"create-vendor",
+	'create-vendor',
 	(input: CreateVendorWorkflowInput) => {
 		const vendor = createVendorStep({
 			name: input.name,
@@ -48,13 +48,13 @@ const createVendorWorkflow = createWorkflow(
 
 		setAuthAppMetadataStep({
 			authIdentityId: input.authIdentityId,
-			actorType: "vendor",
+			actorType: 'vendor',
 			value: vendorAdmin.id,
 		});
 
 		const { data: vendorWithAdmin } = useQueryGraphStep({
-			entity: "vendor",
-			fields: ["id", "name", "handle", "logo", "admins.*"],
+			entity: 'vendor',
+			fields: ['id', 'name', 'handle', 'logo', 'admins.*'],
 			filters: {
 				id: vendor.id,
 			},

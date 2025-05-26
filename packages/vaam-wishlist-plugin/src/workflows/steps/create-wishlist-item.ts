@@ -1,6 +1,6 @@
-import { StepResponse, createStep } from "@medusajs/framework/workflows-sdk";
-import { WISHLIST_MODULE } from "../../modules/wishlist";
-import type WishlistModuleService from "../../modules/wishlist/service";
+import { StepResponse, createStep } from '@medusajs/framework/workflows-sdk';
+import { WISHLIST_MODULE } from '../../modules/wishlist';
+import type WishlistModuleService from '../../modules/wishlist/service';
 
 type CreateWishlistItemStepInput = {
 	wishlist_id: string;
@@ -8,7 +8,7 @@ type CreateWishlistItemStepInput = {
 };
 
 export const createWishlistItemStep = createStep(
-	"create-wishlist-item",
+	'create-wishlist-item',
 	async (input: CreateWishlistItemStepInput, { container }) => {
 		const wishlistModuleService: WishlistModuleService =
 			container.resolve(WISHLIST_MODULE);

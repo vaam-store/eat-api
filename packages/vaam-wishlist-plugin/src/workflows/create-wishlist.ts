@@ -1,9 +1,9 @@
 import {
 	WorkflowResponse,
 	createWorkflow,
-} from "@medusajs/framework/workflows-sdk";
-import { createWishlistStep } from "./steps/create-wishlist";
-import { validateCustomerCreateWishlistStep } from "./steps/validate-customer-create-wishlist";
+} from '@medusajs/framework/workflows-sdk';
+import { createWishlistStep } from './steps/create-wishlist';
+import { validateCustomerCreateWishlistStep } from './steps/validate-customer-create-wishlist';
 
 type CreateWishlistWorkflowInput = {
 	customer_id: string;
@@ -11,7 +11,7 @@ type CreateWishlistWorkflowInput = {
 };
 
 export const createWishlistWorkflow = createWorkflow(
-	"create-wishlist",
+	'create-wishlist',
 	(input: CreateWishlistWorkflowInput) => {
 		validateCustomerCreateWishlistStep({
 			customer_id: input.customer_id,

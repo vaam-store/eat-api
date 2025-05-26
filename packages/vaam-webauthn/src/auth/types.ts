@@ -1,9 +1,9 @@
-import type { ProviderIdentityDTO } from "@medusajs/framework/types";
+import type { ProviderIdentityDTO } from '@medusajs/framework/types';
 import type {
 	AuthenticationResponseJSON,
 	AuthenticatorTransportFuture,
 	CredentialDeviceType,
-} from "@simplewebauthn/types";
+} from '@simplewebauthn/types';
 
 export type Passkey = {
 	id: Base64URLString;
@@ -16,14 +16,14 @@ export type Passkey = {
 };
 
 export type ProviderMetadata = {
-	passkeys?: Record<Base64URLString, Omit<Passkey, "id">>;
+	passkeys?: Record<Base64URLString, Omit<Passkey, 'id'>>;
 	creationOptions?: PublicKeyCredentialCreationOptionsJSON;
 	authOptions?: Record<string, PublicKeyCredentialRequestOptionsJSON>;
 };
 
 export type WebAuthnProviderIdentityDTO = Omit<
 	ProviderIdentityDTO,
-	"provider_metadata"
+	'provider_metadata'
 > & {
 	provider_metadata?: ProviderMetadata;
 };

@@ -4,43 +4,43 @@ import type {
 	AuthenticationInput,
 	AuthenticationResponse,
 	Logger,
-} from "@medusajs/framework/types";
+} from '@medusajs/framework/types';
 import {
 	AbstractAuthModuleProvider,
 	MedusaError,
 	isObject,
 	isString,
-} from "@medusajs/framework/utils";
-import { z } from "zod";
-import WebAuthnApiService from "../modules/webauthn-api/service";
-import { WebAuthnAuth_ID } from "./contants";
+} from '@medusajs/framework/utils';
+import { z } from 'zod';
+import WebAuthnApiService from '../modules/webauthn-api/service';
+import { WebAuthnAuth_ID } from './contants';
 import type {
 	AuthResponse,
 	ProviderMetadata,
 	WebAuthnProviderIdentityDTO,
-} from "./types";
+} from './types';
 
 const PassKeyZod = z.strictObject({
 	id: z.string().refine((val) => /^[A-Za-z0-9-_]+$/.test(val), {
-		message: "Invalid Base64URLString format",
+		message: 'Invalid Base64URLString format',
 	}),
 	publicKey: z.instanceof(Uint8Array),
 	webauthnUserID: z.string().refine((val) => /^[A-Za-z0-9-_]+$/.test(val), {
-		message: "Invalid Base64URLString format",
+		message: 'Invalid Base64URLString format',
 	}),
 	counter: z.number(),
-	deviceType: z.enum(["platform", "cross-platform"]),
+	deviceType: z.enum(['platform', 'cross-platform']),
 	backedUp: z.boolean(),
 	transports: z
 		.array(
 			z.enum([
-				"ble",
-				"cable",
-				"hybrid",
-				"internal",
-				"nfc",
-				"smart-card",
-				"usb",
+				'ble',
+				'cable',
+				'hybrid',
+				'internal',
+				'nfc',
+				'smart-card',
+				'usb',
 			]),
 		)
 		.optional(),
@@ -53,7 +53,7 @@ type InjectedDependencies = {
 
 class WebAuthnAuthService extends AbstractAuthModuleProvider {
 	public static readonly identifier = WebAuthnAuth_ID;
-	public static readonly DISPLAY_NAME = "WebAuthn Authentication";
+	public static readonly DISPLAY_NAME = 'WebAuthn Authentication';
 
 	protected readonly logger: Logger;
 	protected readonly api: WebAuthnApiService;
@@ -70,7 +70,7 @@ class WebAuthnAuthService extends AbstractAuthModuleProvider {
 
 	async update(
 		data: {
-			passkeys: Required<ProviderMetadata>["passkeys"];
+			passkeys: Required<ProviderMetadata>['passkeys'];
 			entity_id: string;
 		},
 		authIdentityService: AuthIdentityProviderService,
@@ -129,21 +129,21 @@ class WebAuthnAuthService extends AbstractAuthModuleProvider {
 		if (!authId || !isString(authId)) {
 			return {
 				success: false,
-				error: "Wrong auth process",
+				error: 'Wrong auth process',
 			};
 		}
 
 		if (!authJSON || !isObject(authJSON)) {
 			return {
 				success: false,
-				error: "Auth should be a string",
+				error: 'Auth should be a string',
 			};
 		}
 
 		if (!username || !isString(username)) {
 			return {
 				success: false,
-				error: "Username should be a string",
+				error: 'Username should be a string',
 			};
 		}
 
@@ -157,7 +157,7 @@ class WebAuthnAuthService extends AbstractAuthModuleProvider {
 			if (error.type === MedusaError.Types.NOT_FOUND) {
 				return {
 					success: false,
-					error: "Invalid username",
+					error: 'Invalid username',
 				};
 			}
 
@@ -172,7 +172,7 @@ class WebAuthnAuthService extends AbstractAuthModuleProvider {
 		if (!isObject(options)) {
 			return {
 				success: false,
-				error: "Invalid options",
+				error: 'Invalid options',
 			};
 		}
 
@@ -184,7 +184,7 @@ class WebAuthnAuthService extends AbstractAuthModuleProvider {
 		if (!success) {
 			return {
 				success: false,
-				error: "Invalid credentials",
+				error: 'Invalid credentials',
 			};
 		}
 
@@ -205,7 +205,7 @@ class WebAuthnAuthService extends AbstractAuthModuleProvider {
 		if (!username || !isString(username)) {
 			return {
 				success: false,
-				error: "Username should be a string",
+				error: 'Username should be a string',
 			};
 		}
 
@@ -216,7 +216,7 @@ class WebAuthnAuthService extends AbstractAuthModuleProvider {
 
 			return {
 				success: false,
-				error: "Identity with email already exists",
+				error: 'Identity with email already exists',
 			};
 		} catch (error) {
 			if (error.type === MedusaError.Types.NOT_FOUND) {
@@ -256,6 +256,5 @@ class WebAuthnAuthService extends AbstractAuthModuleProvider {
 		return copy;
 	}
 }
-
 
 export default WebAuthnAuthService;

@@ -1,21 +1,21 @@
-import { MedusaError } from "@medusajs/framework/utils";
-import { createStep } from "@medusajs/framework/workflows-sdk";
+import { MedusaError } from '@medusajs/framework/utils';
+import { createStep } from '@medusajs/framework/workflows-sdk';
 
 type ValidateCustomerCreateWishlistStepInput = {
 	customer_id: string;
 };
 
 export const validateCustomerCreateWishlistStep = createStep(
-	"validate-customer-create-wishlist",
+	'validate-customer-create-wishlist',
 	async (
 		{ customer_id }: ValidateCustomerCreateWishlistStepInput,
 		{ container },
 	) => {
-		const query = container.resolve("query");
+		const query = container.resolve('query');
 
 		const { data } = await query.graph({
-			entity: "wishlist",
-			fields: ["*"],
+			entity: 'wishlist',
+			fields: ['*'],
 			filters: {
 				customer_id: customer_id,
 			},
@@ -24,14 +24,14 @@ export const validateCustomerCreateWishlistStep = createStep(
 		if (data.length) {
 			throw new MedusaError(
 				MedusaError.Types.NOT_FOUND,
-				"Customer already has a wishlist",
+				'Customer already has a wishlist',
 			);
 		}
 
 		// check that customer exists
 		const { data: customers } = await query.graph({
-			entity: "customer",
-			fields: ["*"],
+			entity: 'customer',
+			fields: ['*'],
 			filters: {
 				id: customer_id,
 			},
@@ -40,7 +40,7 @@ export const validateCustomerCreateWishlistStep = createStep(
 		if (customers.length === 0) {
 			throw new MedusaError(
 				MedusaError.Types.INVALID_DATA,
-				"Specified customer was not found",
+				'Specified customer was not found',
 			);
 		}
 	},

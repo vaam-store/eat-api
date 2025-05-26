@@ -1,26 +1,26 @@
 import {
 	WorkflowResponse,
 	createWorkflow,
-} from "@medusajs/framework/workflows-sdk";
+} from '@medusajs/framework/workflows-sdk';
 import {
 	completeCartWorkflow,
 	createRemoteLinkStep,
 	getOrderDetailWorkflow,
 	useQueryGraphStep,
-} from "@medusajs/medusa/core-flows";
-import createVendorOrdersStep from "./steps/create-vendor-orders";
-import groupVendorItemsStep from "./steps/group-vendor-items";
+} from '@medusajs/medusa/core-flows';
+import createVendorOrdersStep from './steps/create-vendor-orders';
+import groupVendorItemsStep from './steps/group-vendor-items';
 
 type WorkflowInput = {
 	cart_id: string;
 };
 
 const createVendorOrdersWorkflow = createWorkflow(
-	"create-vendor-order",
+	'create-vendor-order',
 	(input: WorkflowInput) => {
 		const { data: carts } = useQueryGraphStep({
-			entity: "cart",
-			fields: ["id", "items.*"],
+			entity: 'cart',
+			fields: ['id', 'items.*'],
 			filters: { id: input.cart_id },
 			options: {
 				throwIfKeyNotFound: true,
@@ -41,14 +41,14 @@ const createVendorOrdersWorkflow = createWorkflow(
 			input: {
 				order_id: orderId,
 				fields: [
-					"region_id",
-					"customer_id",
-					"sales_channel_id",
-					"email",
-					"currency_code",
-					"shipping_address.*",
-					"billing_address.*",
-					"shipping_methods.*",
+					'region_id',
+					'customer_id',
+					'sales_channel_id',
+					'email',
+					'currency_code',
+					'shipping_address.*',
+					'billing_address.*',
+					'shipping_methods.*',
 				],
 			},
 		});

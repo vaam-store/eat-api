@@ -1,8 +1,8 @@
 import type {
 	AuthenticatedMedusaRequest,
 	MedusaResponse,
-} from "@medusajs/framework";
-import { deleteWishlistItemWorkflow } from "../../../../../../../workflows/delete-wishlist-item";
+} from '@medusajs/framework';
+import { deleteWishlistItemWorkflow } from '../../../../../../../workflows/delete-wishlist-item';
 
 export async function DELETE(
 	req: AuthenticatedMedusaRequest,

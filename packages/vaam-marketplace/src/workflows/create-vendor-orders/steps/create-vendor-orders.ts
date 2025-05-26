@@ -3,16 +3,16 @@ import type {
 	InferTypeOf,
 	LinkDefinition,
 	OrderDTO,
-} from "@medusajs/framework/types";
-import { Modules, promiseAll } from "@medusajs/framework/utils";
-import { StepResponse, createStep } from "@medusajs/framework/workflows-sdk";
+} from '@medusajs/framework/types';
+import { Modules, promiseAll } from '@medusajs/framework/utils';
+import { StepResponse, createStep } from '@medusajs/framework/workflows-sdk';
 import {
 	cancelOrderWorkflow,
 	createOrderWorkflow,
-} from "@medusajs/medusa/core-flows";
-import { MARKETPLACE_MODULE } from "../../../modules/marketplace";
-import type Vendor from "../../../modules/marketplace/models/vendor";
-import type MarketplaceModuleService from "../../../modules/marketplace/service";
+} from '@medusajs/medusa/core-flows';
+import { MARKETPLACE_MODULE } from '../../../modules/marketplace';
+import type Vendor from '../../../modules/marketplace/models/vendor';
+import type MarketplaceModuleService from '../../../modules/marketplace/service';
 
 export type VendorOrder = OrderDTO & {
 	vendor: InferTypeOf<typeof Vendor>;
@@ -65,7 +65,7 @@ function prepareOrderData(items: CartLineItemDTO[], parentOrder: OrderDTO) {
 }
 
 const createVendorOrdersStep = createStep(
-	"create-vendor-orders",
+	'create-vendor-orders',
 	async ({ vendorsItems, parentOrder }: StepInput, { container, context }) => {
 		const linkDefs: LinkDefinition[] = [];
 		const createdOrders: VendorOrder[] = [];

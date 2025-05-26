@@ -1,18 +1,18 @@
-import { randomBytes } from "node:crypto";
+import { randomBytes } from 'node:crypto';
 import type {
 	AuthIdentityDTO,
 	AuthIdentityProviderService,
 	AuthenticationInput,
 	AuthenticationResponse,
 	Logger,
-} from "@medusajs/framework/types";
+} from '@medusajs/framework/types';
 import {
 	AbstractAuthModuleProvider,
 	MedusaError,
 	isString,
-} from "@medusajs/framework/utils";
-import argon2 from "argon2";
-import superjson from "superjson";
+} from '@medusajs/framework/utils';
+import argon2 from 'argon2';
+import superjson from 'superjson';
 
 type InjectedDependencies = {
 	logger: Logger;
@@ -23,8 +23,8 @@ type Argon2Options = {
 };
 
 export class ArgoEmailPassAuthService extends AbstractAuthModuleProvider {
-	public static readonly identifier = "emailpass";
-	public static readonly DISPLAY_NAME = "Argon Email/Password Authentication";
+	public static readonly identifier = 'emailpass';
+	public static readonly DISPLAY_NAME = 'Argon Email/Password Authentication';
 
 	protected readonly config: Argon2Options;
 	protected readonly logger: Logger;
@@ -70,7 +70,7 @@ export class ArgoEmailPassAuthService extends AbstractAuthModuleProvider {
 			authIdentity = await authIdentityService.update(entity_id, {
 				provider_metadata: {
 					password: passwordHash,
-					salt: salt.toString("utf-8"),
+					salt: salt.toString('utf-8'),
 				},
 			});
 		} catch (error) {
@@ -90,7 +90,7 @@ export class ArgoEmailPassAuthService extends AbstractAuthModuleProvider {
 			entity_id: email,
 			provider_metadata: {
 				password: passwordHash,
-				salt: salt.toString("utf-8"),
+				salt: salt.toString('utf-8'),
 			},
 		});
 
@@ -115,14 +115,14 @@ export class ArgoEmailPassAuthService extends AbstractAuthModuleProvider {
 		if (!password || !isString(password)) {
 			return {
 				success: false,
-				error: "Password should be a string",
+				error: 'Password should be a string',
 			};
 		}
 
 		if (!email || !isString(email)) {
 			return {
 				success: false,
-				error: "Email should be a string",
+				error: 'Email should be a string',
 			};
 		}
 
@@ -136,7 +136,7 @@ export class ArgoEmailPassAuthService extends AbstractAuthModuleProvider {
 			if (error.type === MedusaError.Types.NOT_FOUND) {
 				return {
 					success: false,
-					error: "Invalid email or password",
+					error: 'Invalid email or password',
 				};
 			}
 
@@ -151,7 +151,7 @@ export class ArgoEmailPassAuthService extends AbstractAuthModuleProvider {
 		if (!isString(passwordHash)) {
 			return {
 				success: false,
-				error: "Invalid email or password",
+				error: 'Invalid email or password',
 			};
 		}
 
@@ -159,7 +159,7 @@ export class ArgoEmailPassAuthService extends AbstractAuthModuleProvider {
 		if (!success) {
 			return {
 				success: false,
-				error: "Invalid email or password",
+				error: 'Invalid email or password',
 			};
 		}
 
@@ -186,14 +186,14 @@ export class ArgoEmailPassAuthService extends AbstractAuthModuleProvider {
 		if (!password || !isString(password)) {
 			return {
 				success: false,
-				error: "Password should be a string",
+				error: 'Password should be a string',
 			};
 		}
 
 		if (!email || !isString(email)) {
 			return {
 				success: false,
-				error: "Email should be a string",
+				error: 'Email should be a string',
 			};
 		}
 
@@ -204,7 +204,7 @@ export class ArgoEmailPassAuthService extends AbstractAuthModuleProvider {
 
 			return {
 				success: false,
-				error: "Identity with email already exists",
+				error: 'Identity with email already exists',
 			};
 		} catch (error) {
 			if (error.type === MedusaError.Types.NOT_FOUND) {

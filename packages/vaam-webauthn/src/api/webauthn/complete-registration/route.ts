@@ -1,10 +1,10 @@
 import type {
 	AuthenticatedMedusaRequest,
 	MedusaResponse,
-} from "@medusajs/framework/http";
-import { MedusaError } from "@medusajs/framework/utils";
-import type { RegistrationResponseJSON } from "@simplewebauthn/types";
-import validateRegistrationOptionsWorkflow from "../../../workflows/complete-registration/index";
+} from '@medusajs/framework/http';
+import { MedusaError } from '@medusajs/framework/utils';
+import type { RegistrationResponseJSON } from '@simplewebauthn/types';
+import validateRegistrationOptionsWorkflow from '../../../workflows/complete-registration/index';
 
 export const POST = async (
 	req: AuthenticatedMedusaRequest<RegistrationResponseJSON>,
@@ -13,7 +13,7 @@ export const POST = async (
 	if (req.auth_context?.actor_id) {
 		throw new MedusaError(
 			MedusaError.Types.INVALID_DATA,
-			"Request already authenticated as a vendor.",
+			'Request already authenticated as a vendor.',
 		);
 	}
 

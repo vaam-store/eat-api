@@ -1,6 +1,6 @@
-import { StepResponse, createStep } from "@medusajs/framework/workflows-sdk";
-import { MARKETPLACE_MODULE } from "../../../modules/marketplace";
-import type MarketplaceModuleService from "../../../modules/marketplace/service";
+import { StepResponse, createStep } from '@medusajs/framework/workflows-sdk';
+import { MARKETPLACE_MODULE } from '../../../modules/marketplace';
+import type MarketplaceModuleService from '../../../modules/marketplace/service';
 
 type CreateVendorAdminStepInput = {
 	email: string;
@@ -10,9 +10,9 @@ type CreateVendorAdminStepInput = {
 };
 
 const createVendorAdminStep = createStep(
-	"create-vendor-admin-step",
+	'create-vendor-admin-step',
 	async (adminData: CreateVendorAdminStepInput, { container }) => {
-		console.log("adminData", adminData);
+		console.log('adminData', adminData);
 		const marketplaceModuleService: MarketplaceModuleService =
 			container.resolve(MARKETPLACE_MODULE);
 

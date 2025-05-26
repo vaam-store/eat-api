@@ -1,6 +1,6 @@
-import { randomBytes } from "node:crypto";
-import { MedusaError } from "@medusajs/framework/utils";
-import { StepResponse, createStep } from "@medusajs/framework/workflows-sdk";
+import { randomBytes } from 'node:crypto';
+import { MedusaError } from '@medusajs/framework/utils';
+import { StepResponse, createStep } from '@medusajs/framework/workflows-sdk';
 import { WebAuthnAuth_ID } from '../../../auth/contants';
 import WebAuthnApiService from '../../../modules/webauthn-api/service';
 
@@ -14,9 +14,9 @@ export type GetAuthOptionsStepResponse = {
 };
 
 const getAuthOptions = createStep(
-	"get-auth-options-step",
+	'get-auth-options-step',
 	async ({ username }: GetAuthOptionsStep, { container }) => {
-		const authService = container.resolve("auth");
+		const authService = container.resolve('auth');
 		const webauthnApiService: WebAuthnApiService = container.resolve(
 			WebAuthnApiService.identifier,
 		);
@@ -31,7 +31,7 @@ const getAuthOptions = createStep(
 		if (!authIdentities.length) {
 			throw new MedusaError(
 				MedusaError.Types.UNAUTHORIZED,
-				"Either no or too much auth configured for this account",
+				'Either no or too much auth configured for this account',
 			);
 		}
 

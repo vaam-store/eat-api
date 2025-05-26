@@ -1,9 +1,9 @@
 import type {
 	AuthenticatedMedusaRequest,
 	MedusaResponse,
-} from "@medusajs/framework";
-import { MedusaError } from "@medusajs/framework/utils";
-import jwt from "jsonwebtoken";
+} from '@medusajs/framework';
+import { MedusaError } from '@medusajs/framework/utils';
+import jwt from 'jsonwebtoken';
 
 export async function POST(
 	req: AuthenticatedMedusaRequest,
@@ -12,15 +12,15 @@ export async function POST(
 	if (!req.publishable_key_context?.sales_channel_ids.length) {
 		throw new MedusaError(
 			MedusaError.Types.INVALID_DATA,
-			"At least one sales channel ID is required to be associated with the publishable API key in the request header.",
+			'At least one sales channel ID is required to be associated with the publishable API key in the request header.',
 		);
 	}
 
-	const query = req.scope.resolve("query");
+	const query = req.scope.resolve('query');
 
 	const { data } = await query.graph({
-		entity: "wishlist",
-		fields: ["*"],
+		entity: 'wishlist',
+		fields: ['*'],
 		filters: {
 			customer_id: req.auth_context.actor_id,
 		},
@@ -29,7 +29,7 @@ export async function POST(
 	if (!data.length) {
 		throw new MedusaError(
 			MedusaError.Types.NOT_FOUND,
-			"No wishlist found for customer",
+			'No wishlist found for customer',
 		);
 	}
 
@@ -39,11 +39,11 @@ export async function POST(
 	) {
 		throw new MedusaError(
 			MedusaError.Types.INVALID_DATA,
-			"Wishlist does not belong to the specified sales channel",
+			'Wishlist does not belong to the specified sales channel',
 		);
 	}
 
-	const { http } = req.scope.resolve("configModule").projectConfig;
+	const { http } = req.scope.resolve('configModule').projectConfig;
 
 	const wishlistToken = jwt.sign(
 		{

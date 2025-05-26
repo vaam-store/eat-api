@@ -1,30 +1,30 @@
-import { MedusaError } from "@medusajs/framework/utils";
+import { MedusaError } from '@medusajs/framework/utils';
 import {
 	type WorkflowData,
 	WorkflowResponse,
 	createWorkflow,
 	transform,
-} from "@medusajs/framework/workflows-sdk";
+} from '@medusajs/framework/workflows-sdk';
 import {
 	setAuthAppMetadataStep,
 	useQueryGraphStep,
-} from "@medusajs/medusa/core-flows";
-import deleteVendorAdminStep from "./steps/delete-vendor-admin";
+} from '@medusajs/medusa/core-flows';
+import deleteVendorAdminStep from './steps/delete-vendor-admin';
 
 export type DeleteVendorAdminWorkflow = {
 	id: string;
 };
 
 export const deleteVendorAdminWorkflow = createWorkflow(
-	"delete-vendor-admin",
+	'delete-vendor-admin',
 	(
 		input: WorkflowData<DeleteVendorAdminWorkflow>,
 	): WorkflowResponse<string> => {
 		deleteVendorAdminStep(input);
 
 		const { data: authIdentities } = useQueryGraphStep({
-			entity: "auth_identity",
-			fields: ["id"],
+			entity: 'auth_identity',
+			fields: ['id'],
 			filters: {
 				app_metadata: {
 					vendor_id: input.id,
@@ -38,7 +38,7 @@ export const deleteVendorAdminWorkflow = createWorkflow(
 			if (!authIdentity) {
 				throw new MedusaError(
 					MedusaError.Types.NOT_FOUND,
-					"Auth identity not found",
+					'Auth identity not found',
 				);
 			}
 
@@ -47,7 +47,7 @@ export const deleteVendorAdminWorkflow = createWorkflow(
 
 		setAuthAppMetadataStep({
 			authIdentityId: authIdentity.id,
-			actorType: "vendor",
+			actorType: 'vendor',
 			value: null,
 		});
 

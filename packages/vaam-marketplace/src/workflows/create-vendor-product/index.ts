@@ -1,16 +1,16 @@
-import type { CreateProductWorkflowInputDTO } from "@medusajs/framework/types";
-import { Modules } from "@medusajs/framework/utils";
+import type { CreateProductWorkflowInputDTO } from '@medusajs/framework/types';
+import { Modules } from '@medusajs/framework/utils';
 import {
 	WorkflowResponse,
 	createWorkflow,
 	transform,
-} from "@medusajs/framework/workflows-sdk";
+} from '@medusajs/framework/workflows-sdk';
 import {
 	createProductsWorkflow,
 	createRemoteLinkStep,
 	useQueryGraphStep,
-} from "@medusajs/medusa/core-flows";
-import { MARKETPLACE_MODULE } from "../../modules/marketplace";
+} from '@medusajs/medusa/core-flows';
+import { MARKETPLACE_MODULE } from '../../modules/marketplace';
 
 type WorkflowInput = {
 	vendor_admin_id: string;
@@ -18,14 +18,14 @@ type WorkflowInput = {
 };
 
 const createVendorProductWorkflow = createWorkflow(
-	"create-vendor-product",
+	'create-vendor-product',
 	(input: WorkflowInput) => {
 		// Retrieve default sales channel to make the product available in.
 		// Alternatively, you can link sales channels to vendors and allow vendors
 		// to manage sales channels
 		const { data: stores } = useQueryGraphStep({
-			entity: "store",
-			fields: ["default_sales_channel_id"],
+			entity: 'store',
+			fields: ['default_sales_channel_id'],
 		});
 
 		const productData = transform(
@@ -54,12 +54,12 @@ const createVendorProductWorkflow = createWorkflow(
 		});
 
 		const { data: vendorAdmins } = useQueryGraphStep({
-			entity: "vendor_admin",
-			fields: ["vendor.id"],
+			entity: 'vendor_admin',
+			fields: ['vendor.id'],
 			filters: {
 				id: input.vendor_admin_id,
 			},
-		}).config({ name: "retrieve-vendor-admins" });
+		}).config({ name: 'retrieve-vendor-admins' });
 
 		const linksToCreate = transform(
 			{
@@ -84,12 +84,12 @@ const createVendorProductWorkflow = createWorkflow(
 		createRemoteLinkStep(linksToCreate);
 
 		const { data: products } = useQueryGraphStep({
-			entity: "product",
-			fields: ["*", "variants.*"],
+			entity: 'product',
+			fields: ['*', 'variants.*'],
 			filters: {
 				id: createdProducts[0].id,
 			},
-		}).config({ name: "retrieve-products" });
+		}).config({ name: 'retrieve-products' });
 
 		return new WorkflowResponse({
 			product: products[0],

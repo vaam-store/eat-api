@@ -1,23 +1,20 @@
-import type {
-	AuthIdentityDTO,
-	Logger,
-} from "@medusajs/framework/types";
-import { MedusaError, isString } from "@medusajs/framework/utils";
+import type { AuthIdentityDTO, Logger } from '@medusajs/framework/types';
+import { MedusaError, isString } from '@medusajs/framework/utils';
 import {
 	generateAuthenticationOptions,
 	generateRegistrationOptions,
 	verifyAuthenticationResponse,
 	verifyRegistrationResponse,
-} from "@simplewebauthn/server";
+} from '@simplewebauthn/server';
 import type {
 	PublicKeyCredentialCreationOptionsJSON,
 	RegistrationResponseJSON,
-} from "@simplewebauthn/types";
+} from '@simplewebauthn/types';
 import { WebAuthnAuth_ID } from '../../auth/contants';
 import type {
 	AuthResponse,
 	WebAuthnProviderIdentityDTO,
-} from "../../auth/types";
+} from '../../auth/types';
 
 type InjectedDependencies = {
 	logger: Logger;
@@ -28,8 +25,8 @@ type Options = {
 	rpID: string;
 };
 class WebAuthnApiService {
-	public static readonly identifier = "webauthn_api";
-	public static readonly DISPLAY_NAME = "WebAuthn API";
+	public static readonly identifier = 'webauthn_api';
+	public static readonly DISPLAY_NAME = 'WebAuthn API';
 
 	protected readonly config: Options;
 	protected readonly logger: Logger;
@@ -70,14 +67,14 @@ class WebAuthnApiService {
 				userName: username,
 				// Don't prompt users for additional information about the authenticator
 				// (Recommended for smoother UX)
-				attestationType: "none",
+				attestationType: 'none',
 				// See "Guiding use of authenticators via authenticatorSelection" below
 				authenticatorSelection: {
 					// Defaults
-					residentKey: "preferred",
-					userVerification: "preferred",
+					residentKey: 'preferred',
+					userVerification: 'preferred',
 					// Optional
-					authenticatorAttachment: "platform",
+					authenticatorAttachment: 'platform',
 				},
 			});
 
@@ -93,7 +90,7 @@ class WebAuthnApiService {
 		if (!meta) {
 			throw new MedusaError(
 				MedusaError.Types.INVALID_DATA,
-				"Webauthn not configured with user",
+				'Webauthn not configured with user',
 			);
 		}
 

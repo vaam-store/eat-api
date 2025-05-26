@@ -1,9 +1,9 @@
 import type {
 	AuthenticatedMedusaRequest,
 	MedusaResponse,
-} from "@medusajs/framework/http";
-import { ContainerRegistrationKeys } from "@medusajs/framework/utils";
-import { getOrdersListWorkflow } from "@medusajs/medusa/core-flows";
+} from '@medusajs/framework/http';
+import { ContainerRegistrationKeys } from '@medusajs/framework/utils';
+import { getOrdersListWorkflow } from '@medusajs/medusa/core-flows';
 
 export const GET = async (
 	req: AuthenticatedMedusaRequest,
@@ -14,8 +14,8 @@ export const GET = async (
 	const {
 		data: [vendorAdmin],
 	} = await query.graph({
-		entity: "vendor_admin",
-		fields: ["vendor.orders.*"],
+		entity: 'vendor_admin',
+		fields: ['vendor.orders.*'],
 		filters: {
 			id: [req.auth_context.actor_id],
 		},
@@ -24,20 +24,20 @@ export const GET = async (
 	const { result: orders } = await getOrdersListWorkflow(req.scope).run({
 		input: {
 			fields: [
-				"metadata",
-				"total",
-				"subtotal",
-				"shipping_total",
-				"tax_total",
-				"items.*",
-				"items.tax_lines",
-				"items.adjustments",
-				"items.variant",
-				"items.variant.product",
-				"items.detail",
-				"shipping_methods",
-				"payment_collections",
-				"fulfillments",
+				'metadata',
+				'total',
+				'subtotal',
+				'shipping_total',
+				'tax_total',
+				'items.*',
+				'items.tax_lines',
+				'items.adjustments',
+				'items.variant',
+				'items.variant.product',
+				'items.detail',
+				'shipping_methods',
+				'payment_collections',
+				'fulfillments',
 			],
 			variables: {
 				filters: {

@@ -1,19 +1,18 @@
 import type {
 	AuthenticatedMedusaRequest,
 	MedusaResponse,
-} from "@medusajs/framework/http";
-import { MedusaError } from "@medusajs/framework/utils";
-import type { RegistrationResponseJSON } from "@simplewebauthn/types";
-import createRegistrationOptionsWorkflow from "../../../workflows/start-registration";
+} from '@medusajs/framework/http';
+import { MedusaError } from '@medusajs/framework/utils';
+import createRegistrationOptionsWorkflow from '../../../workflows/start-registration';
 
 export const POST = async (
-	req: AuthenticatedMedusaRequest<RegistrationResponseJSON>,
+	req: AuthenticatedMedusaRequest<void>,
 	res: MedusaResponse,
 ) => {
 	if (req.auth_context?.actor_id) {
 		throw new MedusaError(
 			MedusaError.Types.INVALID_DATA,
-			"Request already authenticated as a vendor.",
+			'Request already authenticated as a vendor.',
 		);
 	}
 
@@ -24,6 +23,6 @@ export const POST = async (
 	});
 
 	res.json({
-		result: result,
+		options: result,
 	});
 };

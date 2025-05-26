@@ -1,7 +1,7 @@
-import type { InferTypeOf } from "@medusajs/framework/types";
-import { MedusaError } from "@medusajs/framework/utils";
-import { createStep } from "@medusajs/framework/workflows-sdk";
-import type { Wishlist } from "../../modules/wishlist/models/wishlist";
+import type { InferTypeOf } from '@medusajs/framework/types';
+import { MedusaError } from '@medusajs/framework/utils';
+import { createStep } from '@medusajs/framework/workflows-sdk';
+import type { Wishlist } from '../../modules/wishlist/models/wishlist';
 
 type ValidateVariantWishlistStepInput = {
 	variant_id: string;
@@ -10,7 +10,7 @@ type ValidateVariantWishlistStepInput = {
 };
 
 export const validateVariantWishlistStep = createStep(
-	"validate-variant-in-wishlist",
+	'validate-variant-in-wishlist',
 	async (
 		{
 			variant_id,
@@ -27,15 +27,15 @@ export const validateVariantWishlistStep = createStep(
 		if (isInWishlist) {
 			throw new MedusaError(
 				MedusaError.Types.INVALID_DATA,
-				"Variant is already in wishlist",
+				'Variant is already in wishlist',
 			);
 		}
 
 		// validate that the variant is available in the specified sales channel
-		const query = container.resolve("query");
+		const query = container.resolve('query');
 		const { data } = await query.graph({
-			entity: "variant",
-			fields: ["product.sales_channels.*"],
+			entity: 'variant',
+			fields: ['product.sales_channels.*'],
 			filters: {
 				id: variant_id,
 			},
@@ -48,7 +48,7 @@ export const validateVariantWishlistStep = createStep(
 		if (!variantInSalesChannel) {
 			throw new MedusaError(
 				MedusaError.Types.INVALID_DATA,
-				"Variant is not available in the specified sales channel",
+				'Variant is not available in the specified sales channel',
 			);
 		}
 	},

@@ -1,11 +1,11 @@
 import type {
 	AuthenticatedMedusaRequest,
 	MedusaResponse,
-} from "@medusajs/framework";
-import { MedusaError } from "@medusajs/framework/utils";
-import type { z } from "zod";
-import { createWishlistItemWorkflow } from "../../../../../../workflows/create-wishlist-item";
-import type { PostStoreCreateWishlistItem } from "./validators";
+} from '@medusajs/framework';
+import { MedusaError } from '@medusajs/framework/utils';
+import type { z } from 'zod';
+import { createWishlistItemWorkflow } from '../../../../../../workflows/create-wishlist-item';
+import type { PostStoreCreateWishlistItem } from './validators';
 
 type PostStoreCreateWishlistItemType = z.infer<
 	typeof PostStoreCreateWishlistItem
@@ -18,7 +18,7 @@ export async function POST(
 	if (!req.publishable_key_context?.sales_channel_ids.length) {
 		throw new MedusaError(
 			MedusaError.Types.INVALID_DATA,
-			"At least one sales channel ID is required to be associated with the publishable API key in the request header.",
+			'At least one sales channel ID is required to be associated with the publishable API key in the request header.',
 		);
 	}
 	const { result } = await createWishlistItemWorkflow(req.scope).run({

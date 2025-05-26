@@ -1,8 +1,8 @@
-import { model } from "@medusajs/framework/utils";
-import { WishlistItem } from "./wishlist-item";
+import { model } from '@medusajs/framework/utils';
+import { WishlistItem } from './wishlist-item';
 
 export const Wishlist = model
-	.define("wishlist", {
+	.define('wishlist', {
 		id: model.id().primaryKey(),
 		customer_id: model.text(),
 		sales_channel_id: model.text(),
@@ -10,7 +10,7 @@ export const Wishlist = model
 	})
 	.indexes([
 		{
-			on: ["customer_id", "sales_channel_id"],
+			on: ['customer_id', 'sales_channel_id'],
 			unique: true,
 		},
 	]);

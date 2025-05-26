@@ -1,7 +1,7 @@
-import type { InferTypeOf } from "@medusajs/framework/types";
-import { MedusaError } from "@medusajs/framework/utils";
-import { createStep } from "@medusajs/framework/workflows-sdk";
-import type { Wishlist } from "../../modules/wishlist/models/wishlist";
+import type { InferTypeOf } from '@medusajs/framework/types';
+import { MedusaError } from '@medusajs/framework/utils';
+import { createStep } from '@medusajs/framework/workflows-sdk';
+import type { Wishlist } from '../../modules/wishlist/models/wishlist';
 
 type ValidateItemInWishlistStepInput = {
 	wishlist: InferTypeOf<typeof Wishlist>;
@@ -9,7 +9,7 @@ type ValidateItemInWishlistStepInput = {
 };
 
 export const validateItemInWishlistStep = createStep(
-	"validate-item-in-wishlist",
+	'validate-item-in-wishlist',
 	async (
 		{ wishlist, wishlist_item_id }: ValidateItemInWishlistStepInput,
 		{ container },

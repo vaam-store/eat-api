@@ -2,9 +2,9 @@ import {
 	type WorkflowData,
 	WorkflowResponse,
 	createWorkflow,
-} from "@medusajs/framework/workflows-sdk";
-import type { PublicKeyCredentialRequestOptionsJSON } from "@simplewebauthn/types";
-import getAuthOptions from "./steps/get-auth-options-step";
+} from '@medusajs/framework/workflows-sdk';
+import type { PublicKeyCredentialRequestOptionsJSON } from '@simplewebauthn/types';
+import getAuthOptions from './steps/get-auth-options-step';
 
 export type StartAuthenticationWorkflow = {
 	username: string;
@@ -16,7 +16,7 @@ export type StartAuthenticationWorkflowResponse = {
 };
 
 export const startAuthenticationWorkflow = createWorkflow(
-	"start-authentication",
+	'start-authentication',
 	(
 		input: WorkflowData<StartAuthenticationWorkflow>,
 	): WorkflowResponse<StartAuthenticationWorkflowResponse> => {

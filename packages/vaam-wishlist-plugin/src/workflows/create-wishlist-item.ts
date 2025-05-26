@@ -1,12 +1,12 @@
 import {
 	WorkflowResponse,
 	createWorkflow,
-} from "@medusajs/framework/workflows-sdk";
-import { useQueryGraphStep } from "@medusajs/medusa/core-flows";
-import { createWishlistItemStep } from "./steps/create-wishlist-item";
-import { validateVariantWishlistStep } from "./steps/validate-variant-wishlist";
-import { validateWishlistExistsStep } from "./steps/validate-wishlist-exists";
-import { validateWishlistSalesChannelStep } from "./steps/validate-wishlist-sales-channel";
+} from '@medusajs/framework/workflows-sdk';
+import { useQueryGraphStep } from '@medusajs/medusa/core-flows';
+import { createWishlistItemStep } from './steps/create-wishlist-item';
+import { validateVariantWishlistStep } from './steps/validate-variant-wishlist';
+import { validateWishlistExistsStep } from './steps/validate-wishlist-exists';
+import { validateWishlistSalesChannelStep } from './steps/validate-wishlist-sales-channel';
 
 type CreateWishlistItemWorkflowInput = {
 	variant_id: string;
@@ -15,11 +15,11 @@ type CreateWishlistItemWorkflowInput = {
 };
 
 export const createWishlistItemWorkflow = createWorkflow(
-	"create-wishlist-item",
+	'create-wishlist-item',
 	(input: CreateWishlistItemWorkflowInput) => {
 		const { data: wishlists } = useQueryGraphStep({
-			entity: "wishlist",
-			fields: ["*", "items.*"],
+			entity: 'wishlist',
+			fields: ['*', 'items.*'],
 			filters: {
 				customer_id: input.customer_id,
 			},
@@ -47,12 +47,12 @@ export const createWishlistItemWorkflow = createWorkflow(
 
 		// refetch wishlist
 		const { data: updatedWishlists } = useQueryGraphStep({
-			entity: "wishlist",
-			fields: ["*", "items.*", "items.product_variant.*"],
+			entity: 'wishlist',
+			fields: ['*', 'items.*', 'items.product_variant.*'],
 			filters: {
 				id: wishlists[0].id,
 			},
-		}).config({ name: "refetch-wishlist" });
+		}).config({ name: 'refetch-wishlist' });
 
 		return new WorkflowResponse({
 			wishlist: updatedWishlists[0],
