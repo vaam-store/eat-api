@@ -26,16 +26,12 @@ export default defineMiddlewares({
 		},
 		{
 			matcher: '/vendors/*',
-			middlewares: [
-				authenticate('vendor', ['session', 'bearer']),
-			],
+			middlewares: [authenticate('vendor', ['session', 'bearer'])],
 		},
 		{
 			matcher: '/vendors/products',
 			method: ['POST'],
-			middlewares: [
-				validateAndTransformBody(AdminCreateProduct)
-			],
+			middlewares: [validateAndTransformBody(AdminCreateProduct)],
 		},
 		{
 			matcher: '/vendors',

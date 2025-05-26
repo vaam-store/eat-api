@@ -4,7 +4,7 @@ import type {
 } from '@medusajs/framework/http';
 import type { HttpTypes } from '@medusajs/framework/types';
 import { ContainerRegistrationKeys } from '@medusajs/framework/utils';
-import createVendorProductWorkflow from '../../../workflows/create-vendor-product/index';
+import createVendorProductWorkflow from '../../../workflows/create-vendor-product';
 
 export const GET = async (
 	req: AuthenticatedMedusaRequest,

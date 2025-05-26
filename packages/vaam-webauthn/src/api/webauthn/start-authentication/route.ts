@@ -2,7 +2,7 @@ import type { MedusaRequest, MedusaResponse } from '@medusajs/framework/http';
 import {
 	type StartAuthenticationWorkflow,
 	startAuthenticationWorkflow,
-} from '../../../workflows/start-authentication/index';
+} from '../../../workflows/start-authentication';
 
 export const POST = async (
 	req: MedusaRequest<StartAuthenticationWorkflow>,

@@ -6,7 +6,7 @@ import { MedusaError } from '@medusajs/framework/utils';
 import { z } from 'zod';
 import createVendorWorkflow, {
 	type CreateVendorWorkflowInput,
-} from '../../workflows/create-vendor/index';
+} from '../../workflows/create-vendor';
 
 export const PostVendorCreateSchema = z
 	.object({

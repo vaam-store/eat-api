@@ -2,7 +2,7 @@ import type {
 	AuthenticatedMedusaRequest,
 	MedusaResponse,
 } from '@medusajs/framework/http';
-import { deleteVendorAdminWorkflow } from '../../../../workflows/delete-vendor-admin/index';
+import { deleteVendorAdminWorkflow } from '../../../../workflows/delete-vendor-admin';
 
 export const DELETE = async (
 	req: AuthenticatedMedusaRequest,

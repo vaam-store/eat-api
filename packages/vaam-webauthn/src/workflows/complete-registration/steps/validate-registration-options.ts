@@ -30,23 +30,24 @@ const validateRegistrationOptionsStep = createStep(
 		const providerIdentity =
 			webauthnApiService.getProviderIdentity(authIdentity);
 
-		if (!providerIdentity?.provider_metadata?.creationOptions || !providerIdentity.provider_metadata) {
+		if (
+			!providerIdentity?.provider_metadata?.creationOptions ||
+			!providerIdentity.provider_metadata
+		) {
 			throw new MedusaError(
 				MedusaError.Types.INVALID_DATA,
 				'user not registred? How?',
 			);
 		}
 
-		const { verified, registrationInfo } = await webauthnApiService.verifyRegistrationResponse({
-			body: payload,
-			options: providerIdentity.provider_metadata?.creationOptions,
-		});
+		const { verified, registrationInfo } =
+			await webauthnApiService.verifyRegistrationResponse({
+				body: payload,
+				options: providerIdentity.provider_metadata?.creationOptions,
+			});
 
-		const {
-			credential,
-			credentialDeviceType,
-			credentialBackedUp,
-		} = registrationInfo!;
+		const { credential, credentialDeviceType, credentialBackedUp } =
+			registrationInfo!;
 
 		const newPasskey: Passkey = {
 			// A unique identifier for the credential
@@ -63,7 +64,8 @@ const validateRegistrationOptionsStep = createStep(
 			backedUp: credentialBackedUp,
 		};
 
-		providerIdentity.provider_metadata.passkeys = providerIdentity.provider_metadata.passkeys ?? {};
+		providerIdentity.provider_metadata.passkeys =
+			providerIdentity.provider_metadata.passkeys ?? {};
 		providerIdentity.provider_metadata.passkeys[credential.id] = newPasskey;
 		authService.updateProviderIdentities(providerIdentity);
 

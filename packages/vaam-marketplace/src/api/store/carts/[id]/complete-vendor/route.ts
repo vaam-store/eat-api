@@ -2,7 +2,7 @@ import type {
 	AuthenticatedMedusaRequest,
 	MedusaResponse,
 } from '@medusajs/framework';
-import createVendorOrdersWorkflow from '../../../../../workflows/create-vendor-orders/index';
+import createVendorOrdersWorkflow from '../../../../../workflows/create-vendor-orders';
 
 export const POST = async (
 	req: AuthenticatedMedusaRequest,
