@@ -82,11 +82,19 @@ module.exports = defineConfig({
 	},
 	plugins: [
 		{
-			resolve: "medusa-wishlist-plugin",
+			resolve: "@vymalo/medusa-marketplace",
 			options: {},
 		},
 		{
 			resolve: "@vymalo/medusa-meilisearch",
+			options: {},
+		},
+		{
+			resolve: "@vymalo/medusa-wishlist",
+			options: {},
+		},
+		{
+			resolve: "@vymalo/medusa-webauthn",
 			options: {},
 		},
 	],
@@ -110,8 +118,8 @@ module.exports = defineConfig({
 			cookieSecret: process.env.COOKIE_SECRET!,
 			authMethodsPerActor: {
 				user: ["emailpass"],
-				customer: ["vaam-oauth2"],
-				vendor: ["vaam-oauth2"],
+				customer: ["vaam-oauth2", "vaam-webauthn"],
+				vendor: ["vaam-oauth2", "vaam-webauthn"],
 			},
 		},
 	},
@@ -201,13 +209,7 @@ module.exports = defineConfig({
 			dependencies: [],
 		},
 		{
-			resolve: "./src/modules/vendor",
-			options: {},
-			dependencies: [],
-		},
-		{
 			resolve: "@medusajs/medusa/auth",
-			dependencies: ["cache", "logger", "webauthn_api"],
 			options: {
 				providers: [
 					{
@@ -219,6 +221,11 @@ module.exports = defineConfig({
 							clientId: process.env.KEYCLOAK_CLIENT_SECRET,
 							clientSecret: process.env.KEYCLOAK_CLIENT_SECRET,
 						},
+					},
+					{
+						resolve: "@vymalo/medusa-webauthn/auth",
+						id: "vaam-webauthn",
+						options: {},
 					},
 					{
 						resolve: "./src/modules/argon-emailpass",

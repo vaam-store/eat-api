@@ -7,7 +7,7 @@
 	},
 	"files": {
 		"ignoreUnknown": false,
-		"ignore": [".medusa", "medusa-config.ts"]
+		"ignore": [".medusa", "medusa-config.ts", "node_modules"]
 	},
 	"formatter": {
 		"enabled": true,
@@ -25,6 +25,9 @@
 			},
 			"performance": {
 				"noDelete": "off"
+			},
+			"correctness": {
+				"noUnusedImports": "error"
 			}
 		}
 	},

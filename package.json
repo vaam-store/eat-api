@@ -23,7 +23,7 @@
 		"test:integration:modules": "TEST_TYPE=integration:modules NODE_OPTIONS=--experimental-vm-modules jest --silent --runInBand --forceExit",
 		"test:unit": "TEST_TYPE=unit NODE_OPTIONS=--experimental-vm-modules jest --silent --runInBand --forceExit",
 		"migrations": "medusa db:migrate",
-		"add:user:admin": "medusa user -e wel@come -p password",
+		"add:user:admin": "medusa user -e wel@co.me -p password",
 		"backend:format": "biome format --write ."
 	},
 	"dependencies": {
@@ -38,8 +38,11 @@
 		"@simplewebauthn/browser": "^13.1.0",
 		"@simplewebauthn/server": "^13.1.1",
 		"@vymalo/medusa-keycloak": "^1.0.7",
+		"@vymalo/medusa-marketplace": "file:.yalc/@vymalo/medusa-marketplace",
 		"@vymalo/medusa-meilisearch": "^1.0.14",
 		"@vymalo/medusa-minio": "^1.0.7",
+		"@vymalo/medusa-webauthn": "file:.yalc/@vymalo/medusa-webauthn",
+		"@vymalo/medusa-wishlist": "file:.yalc/@vymalo/medusa-wishlist",
 		"argon2": "^0.43.0",
 		"awilix": "^8",
 		"medusa-wishlist-plugin": "^0.4.1",
@@ -50,6 +53,7 @@
 		"@biomejs/biome": "1.9.4",
 		"@medusajs/test-utils": "2.8.3",
 		"@mikro-orm/cli": "6.4.3",
+		"@simplewebauthn/types": "^12.0.0",
 		"@swc/core": "1.5.7",
 		"@swc/jest": "^0.2.36",
 		"@types/argon2": "^0.15.4",

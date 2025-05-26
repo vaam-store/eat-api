@@ -1,0 +1,56 @@
+{
+	"name": "@vymalo/medusa-wishlist",
+	"version": "0.4.1",
+	"description": "Plugin for wishlist functionality in Medusa.",
+	"author": "Shahed Nasser <shahednasser@gmail.com>",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/medusajs/examples.git",
+		"directory": "wishlist-plugin"
+	},
+	"license": "MIT",
+	"files": [".medusa/server"],
+	"exports": {
+		"./package.json": "./package.json",
+		"./workflows": "./.medusa/server/src/workflows/index.js",
+		"./.medusa/server/src/modules/*": "./.medusa/server/src/modules/*/index.js",
+		"./modules/*": "./.medusa/server/src/modules/*/index.js",
+		"./providers/*": "./.medusa/server/src/providers/*/index.js",
+		"./*": "./.medusa/server/src/*.js",
+		"./admin": {
+			"import": "./.medusa/server/src/admin/index.mjs",
+			"require": "./.medusa/server/src/admin/index.js",
+			"default": "./.medusa/server/src/admin/index.js"
+		}
+	},
+	"keywords": ["medusa-v2", "plugin", "medusa-plugin-other"],
+	"scripts": {
+		"build": "medusa plugin:build",
+		"dev": "medusa plugin:develop",
+		"prepublishOnly": "medusa plugin:build"
+	},
+	"peerDependencies": {
+		"@medusajs/admin-sdk": "2.8.2",
+		"@medusajs/cli": "2.8.2",
+		"@medusajs/framework": "2.8.2",
+		"@medusajs/icons": "2.8.2",
+		"@medusajs/js-sdk": "2.8.2",
+		"@medusajs/medusa": "2.8.2",
+		"@medusajs/test-utils": "2.8.2",
+		"@medusajs/ui": "4.0.12",
+		"@mikro-orm/cli": "6.4.3",
+		"@mikro-orm/core": "6.4.3",
+		"@mikro-orm/knex": "6.4.3",
+		"@mikro-orm/migrations": "6.4.3",
+		"@mikro-orm/postgresql": "6.4.3",
+		"awilix": "^8.0.1",
+		"pg": "^8.13.0"
+	},
+	"engines": {
+		"node": ">=20"
+	},
+	"dependencies": {
+		"jsonwebtoken": "^9.0.2"
+	},
+	"yalcSig": "b3168305e8ee67b0b2c839658053c19a"
+}

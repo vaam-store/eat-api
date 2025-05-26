@@ -7232,6 +7232,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@simplewebauthn/types@npm:^12.0.0":
+  version: 12.0.0
+  resolution: "@simplewebauthn/types@npm:12.0.0"
+  checksum: 10c0/b7ce0ae692ea1e069ad9cb028fc1ccfe3f37e0f197825ba9e468e60194f463e88f5db254ddea296019b470a465ffaffa96fe27bb5e1e5d5d14bfcd068b04abed
+  languageName: node
+  linkType: hard
+
 "@sinclair/typebox@npm:^0.27.8":
   version: 0.27.8
   resolution: "@sinclair/typebox@npm:0.27.8"
@@ -8431,6 +8438,29 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@vymalo/medusa-marketplace@file:.yalc/@vymalo/medusa-marketplace::locator=vaam-eat%40workspace%3A.":
+  version: 0.0.1
+  resolution: "@vymalo/medusa-marketplace@file:.yalc/@vymalo/medusa-marketplace#.yalc/@vymalo/medusa-marketplace::hash=28de3c&locator=vaam-eat%40workspace%3A."
+  peerDependencies:
+    "@medusajs/admin-sdk": 2.8.2
+    "@medusajs/cli": 2.8.2
+    "@medusajs/framework": 2.8.2
+    "@medusajs/icons": 2.8.2
+    "@medusajs/js-sdk": 2.8.2
+    "@medusajs/medusa": 2.8.2
+    "@medusajs/test-utils": 2.8.2
+    "@medusajs/ui": 4.0.12
+    "@mikro-orm/cli": 6.4.3
+    "@mikro-orm/core": 6.4.3
+    "@mikro-orm/knex": 6.4.3
+    "@mikro-orm/migrations": 6.4.3
+    "@mikro-orm/postgresql": 6.4.3
+    awilix: ^8.0.1
+    pg: ^8.13.0
+  checksum: 10c0/4d90d81d0c0da05519db0313a8b7c2606bc2646d971cccecf43f3b19839fa501799c1bb30d946b46c16e80efea85ddcbb5b7ef776abfa1ca10b0bffee3850fdc
+  languageName: node
+  linkType: hard
+
 "@vymalo/medusa-meilisearch@npm:^1.0.14":
   version: 1.0.14
   resolution: "@vymalo/medusa-meilisearch@npm:1.0.14"
@@ -8447,6 +8477,57 @@ __metadata:
     fs-extra: "npm:^11.3.0"
     minio: "npm:^8.0.5"
   checksum: 10c0/c6cc38309a0e74659fd5366bbd7e6d3313bee31eda91497eb9928a5358ea7cf51e7d0caf4fedcb1cb95faba0a7ac2563db95a6fb05c4d4315cdcb33cf6536d64
+  languageName: node
+  linkType: hard
+
+"@vymalo/medusa-webauthn@file:.yalc/@vymalo/medusa-webauthn::locator=vaam-eat%40workspace%3A.":
+  version: 0.0.1
+  resolution: "@vymalo/medusa-webauthn@file:.yalc/@vymalo/medusa-webauthn#.yalc/@vymalo/medusa-webauthn::hash=5475ed&locator=vaam-eat%40workspace%3A."
+  dependencies:
+    "@simplewebauthn/server": "npm:^13.1.1"
+    "@simplewebauthn/types": "npm:^12.0.0"
+  peerDependencies:
+    "@medusajs/admin-sdk": 2.8.2
+    "@medusajs/cli": 2.8.2
+    "@medusajs/framework": 2.8.2
+    "@medusajs/icons": 2.8.2
+    "@medusajs/js-sdk": 2.8.2
+    "@medusajs/medusa": 2.8.2
+    "@medusajs/test-utils": 2.8.2
+    "@medusajs/ui": 4.0.12
+    "@mikro-orm/cli": 6.4.3
+    "@mikro-orm/core": 6.4.3
+    "@mikro-orm/knex": 6.4.3
+    "@mikro-orm/migrations": 6.4.3
+    "@mikro-orm/postgresql": 6.4.3
+    awilix: ^8.0.1
+    pg: ^8.13.0
+  checksum: 10c0/d61444017ff93737740277be03f3e4676224e165a952fc3e239bc2be24751f70bfd255776b94a9a24da6c94b8e1941fb1492cb34382ce78d862057775d67dd46
+  languageName: node
+  linkType: hard
+
+"@vymalo/medusa-wishlist@file:.yalc/@vymalo/medusa-wishlist::locator=vaam-eat%40workspace%3A.":
+  version: 0.4.1
+  resolution: "@vymalo/medusa-wishlist@file:.yalc/@vymalo/medusa-wishlist#.yalc/@vymalo/medusa-wishlist::hash=870700&locator=vaam-eat%40workspace%3A."
+  dependencies:
+    jsonwebtoken: "npm:^9.0.2"
+  peerDependencies:
+    "@medusajs/admin-sdk": 2.8.2
+    "@medusajs/cli": 2.8.2
+    "@medusajs/framework": 2.8.2
+    "@medusajs/icons": 2.8.2
+    "@medusajs/js-sdk": 2.8.2
+    "@medusajs/medusa": 2.8.2
+    "@medusajs/test-utils": 2.8.2
+    "@medusajs/ui": 4.0.12
+    "@mikro-orm/cli": 6.4.3
+    "@mikro-orm/core": 6.4.3
+    "@mikro-orm/knex": 6.4.3
+    "@mikro-orm/migrations": 6.4.3
+    "@mikro-orm/postgresql": 6.4.3
+    awilix: ^8.0.1
+    pg: ^8.13.0
+  checksum: 10c0/e071f4bcd53ace7d1adf8520a8ae31c71521faf153f0aaf2546e98e58fdf864c433777c3416a6453afaf529435f75ff018746b56e9eeb33358a595da62688991
   languageName: node
   linkType: hard
 
@@ -16489,6 +16570,7 @@ __metadata:
     "@mikro-orm/postgresql": "npm:6.4.3"
     "@simplewebauthn/browser": "npm:^13.1.0"
     "@simplewebauthn/server": "npm:^13.1.1"
+    "@simplewebauthn/types": "npm:^12.0.0"
     "@swc/core": "npm:1.5.7"
     "@swc/jest": "npm:^0.2.36"
     "@types/argon2": "npm:^0.15.4"
@@ -16497,8 +16579,11 @@ __metadata:
     "@types/react": "npm:^18.3.2"
     "@types/react-dom": "npm:^18.2.25"
     "@vymalo/medusa-keycloak": "npm:^1.0.7"
+    "@vymalo/medusa-marketplace": "file:.yalc/@vymalo/medusa-marketplace"
     "@vymalo/medusa-meilisearch": "npm:^1.0.14"
     "@vymalo/medusa-minio": "npm:^1.0.7"
+    "@vymalo/medusa-webauthn": "file:.yalc/@vymalo/medusa-webauthn"
+    "@vymalo/medusa-wishlist": "file:.yalc/@vymalo/medusa-wishlist"
     argon2: "npm:^0.43.0"
     awilix: "npm:^8"
     jest: "npm:^29.7.0"

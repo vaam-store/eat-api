@@ -2,16 +2,11 @@ import type {
 	CreateInventoryLevelInput,
 	ExecArgs,
 } from "@medusajs/framework/types";
-import {
-	ContainerRegistrationKeys,
-	Modules,
-	ProductStatus,
-} from "@medusajs/framework/utils";
+import { ContainerRegistrationKeys, Modules } from "@medusajs/framework/utils";
 import {
 	createApiKeysWorkflow,
 	createInventoryLevelsWorkflow,
 	createProductCategoriesWorkflow,
-	createProductsWorkflow,
 	createRegionsWorkflow,
 	createSalesChannelsWorkflow,
 	createShippingOptionsWorkflow,

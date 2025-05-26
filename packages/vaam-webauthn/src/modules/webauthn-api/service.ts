@@ -1,0 +1,168 @@
+import type {
+	AuthIdentityDTO,
+	Logger,
+} from "@medusajs/framework/types";
+import { MedusaError } from "@medusajs/framework/utils";
+import {
+	generateAuthenticationOptions,
+	generateRegistrationOptions,
+	verifyAuthenticationResponse,
+	verifyRegistrationResponse,
+} from "@simplewebauthn/server";
+import type {
+	PublicKeyCredentialCreationOptionsJSON,
+	RegistrationResponseJSON,
+} from "@simplewebauthn/types";
+import { WebAuthnAuth_ID } from '../../auth/contants';
+import type {
+	AuthResponse,
+	WebAuthnProviderIdentityDTO,
+} from "../../auth/types";
+
+type InjectedDependencies = {
+	logger: Logger;
+};
+
+type Options = {
+	rpName: string;
+	rpID: string;
+};
+class WebAuthnApiService {
+	public static readonly identifier = "webauthn_api";
+	public static readonly DISPLAY_NAME = "WebAuthn API";
+
+	protected readonly config: Options;
+	protected readonly logger: Logger;
+
+	constructor({ logger }: InjectedDependencies, options: Options) {
+		this.config = options;
+		this.logger = logger;
+	}
+
+	public getProviderIdentity(authIdentity?: AuthIdentityDTO) {
+		const providerIdentity = authIdentity?.provider_identities?.find(
+			(pi) => pi.provider === WebAuthnAuth_ID,
+		) as WebAuthnProviderIdentityDTO | undefined;
+
+		return providerIdentity;
+	}
+
+	public async generateRegistrationOptions(username: string) {
+		const options: PublicKeyCredentialCreationOptionsJSON =
+			await generateRegistrationOptions({
+				rpName: this.config.rpName,
+				rpID: this.config.rpID,
+				userName: username,
+				// Don't prompt users for additional information about the authenticator
+				// (Recommended for smoother UX)
+				attestationType: "none",
+				// See "Guiding use of authenticators via authenticatorSelection" below
+				authenticatorSelection: {
+					// Defaults
+					residentKey: "preferred",
+					userVerification: "preferred",
+					// Optional
+					authenticatorAttachment: "platform",
+				},
+			});
+
+		return options;
+	}
+
+	public async generateAuthenticationOptions(
+		authId: string,
+		authIdentity: AuthIdentityDTO,
+	) {
+		const meta = this.getProviderIdentity(authIdentity)?.provider_metadata;
+
+		if (!meta) {
+			throw new MedusaError(
+				MedusaError.Types.INVALID_DATA,
+				"Webauthn not configured with user",
+			);
+		}
+
+		const options = await generateAuthenticationOptions({
+			rpID: this.config.rpID,
+			// Require users to use a previously-registered authenticator
+			allowCredentials: Object.entries(meta.passkeys ?? {}).map(
+				([id, passkey]) => ({
+					id: id,
+					transports: passkey.transports,
+				}),
+			),
+		});
+
+		meta.authOptions = {
+			...meta.authOptions,
+			[authId]: options,
+		};
+
+		return { options, authIdentity };
+	}
+
+	public async verifyRegistrationResponse({
+		body,
+		authIdentity,
+	}: {
+		body: RegistrationResponseJSON;
+		authIdentity: AuthIdentityDTO;
+	}) {
+		const providerIdentity = this.getProviderIdentity(authIdentity);
+		const previousOptions =
+			providerIdentity?.provider_metadata?.creationOptions;
+		if (!previousOptions) {
+			return false;
+		}
+
+		const { verified } = await verifyRegistrationResponse({
+			response: body,
+			expectedChallenge: previousOptions.challenge,
+			expectedOrigin: origin,
+			expectedRPID: this.config.rpID,
+		});
+
+		return verified;
+	}
+
+	public async verifyAuthenticationResponse({
+		username,
+		body,
+		authIdentity,
+	}: {
+		username: string;
+		body: AuthResponse;
+		authIdentity: AuthIdentityDTO;
+	}) {
+		const providerIdentity = this.getProviderIdentity(authIdentity);
+
+		const previousOptions =
+			providerIdentity?.provider_metadata?.authOptions?.[body.authId];
+		if (!previousOptions) {
+			return false;
+		}
+
+		const passkey =
+			providerIdentity?.provider_metadata?.passkeys?.[body.authJSON.id];
+		if (!passkey) {
+			return false;
+		}
+
+		const { verified } = await verifyAuthenticationResponse({
+			response: body.authJSON,
+			expectedChallenge: previousOptions.challenge,
+			expectedOrigin: origin,
+			expectedRPID: this.config.rpID,
+			credential: {
+				id: body.authJSON.id,
+				publicKey: passkey.publicKey,
+				counter: passkey.counter,
+				transports: passkey.transports,
+			},
+		});
+
+		return verified;
+	}
+}
+
+export default WebAuthnApiService;

@@ -1,9 +1,9 @@
+import { randomBytes } from "node:crypto";
 import type {
 	AuthIdentityDTO,
 	AuthIdentityProviderService,
 	AuthenticationInput,
 	AuthenticationResponse,
-	EmailPassAuthProviderOptions,
 	Logger,
 } from "@medusajs/framework/types";
 import {
@@ -12,7 +12,6 @@ import {
 	isString,
 } from "@medusajs/framework/utils";
 import argon2 from "argon2";
-import { randomBytes } from "node:crypto";
 import superjson from "superjson";
 
 type InjectedDependencies = {
