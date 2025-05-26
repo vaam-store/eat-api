@@ -1,10 +1,16 @@
 import {
 	authenticate,
 	defineMiddlewares,
+	type MedusaNextFunction,
+	type MedusaRequest,
+	type MedusaResponse,
 	validateAndTransformBody,
 } from '@medusajs/framework/http';
 import { AdminCreateProduct } from '@medusajs/medusa/api/admin/products/validators';
 import { PostVendorCreateSchema } from './vendors/route';
+import cors from 'cors';
+import { parseCorsOrigins } from '@medusajs/framework/utils';
+import type { ConfigModule } from '@medusajs/framework/types';
 
 export default defineMiddlewares({
 	routes: [
@@ -20,12 +26,29 @@ export default defineMiddlewares({
 		},
 		{
 			matcher: '/vendors/*',
-			middlewares: [authenticate('vendor', ['session', 'bearer'])],
+			middlewares: [
+				authenticate('vendor', ['session', 'bearer']),
+			],
 		},
 		{
 			matcher: '/vendors/products',
 			method: ['POST'],
-			middlewares: [validateAndTransformBody(AdminCreateProduct)],
+			middlewares: [
+				validateAndTransformBody(AdminCreateProduct)
+			],
+		},
+		{
+			matcher: '/vendors',
+			middlewares: [
+				(req: MedusaRequest, res: MedusaResponse, next: MedusaNextFunction) => {
+					const configModule: ConfigModule = req.scope.resolve('configModule');
+
+					return cors({
+						origin: parseCorsOrigins(configModule.projectConfig.http.storeCors),
+						credentials: true,
+					})(req, res, next);
+				},
+			],
 		},
 	],
 });

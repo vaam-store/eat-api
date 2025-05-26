@@ -11,7 +11,7 @@ import createVendorWorkflow, {
 export const PostVendorCreateSchema = z
 	.object({
 		name: z.string(),
-		handle: z.string().optional(),
+		handle: z.string(),
 		logo: z.string().optional(),
 		admin: z
 			.object({

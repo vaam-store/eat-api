@@ -1,12 +1,10 @@
 {
 	"name": "@vymalo/medusa-webauthn",
-	"version": "0.0.33",
+	"version": "0.0.34",
 	"description": "A starter for Medusa projects.",
 	"author": "Medusa (https://medusajs.com)",
 	"license": "MIT",
-	"files": [
-		".medusa/server"
-	],
+	"files": [".medusa/server"],
 	"exports": {
 		"./package.json": "./package.json",
 		"./workflows": "./.medusa/server/src/workflows/index.js",

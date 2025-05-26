@@ -15,7 +15,7 @@ export default defineMiddlewares({
 			matcher: '/webauthn/start-registration',
 			method: ['POST'],
 			middlewares: [
-				authenticate(['customer', 'customer'], ['session', 'bearer'], {
+				authenticate(['vendor', 'customer'], ['session', 'bearer'], {
 					allowUnregistered: true,
 				}),
 			],
@@ -24,7 +24,7 @@ export default defineMiddlewares({
 			matcher: '/webauthn/complete-registration',
 			method: ['POST'],
 			middlewares: [
-				authenticate(['customer', 'customer'], ['session', 'bearer'], {
+				authenticate(['vendor', 'customer'], ['session', 'bearer'], {
 					allowUnregistered: true,
 				}),
 			],
