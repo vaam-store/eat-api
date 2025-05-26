@@ -7210,13 +7210,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@simplewebauthn/browser@npm:^13.1.0":
-  version: 13.1.0
-  resolution: "@simplewebauthn/browser@npm:13.1.0"
-  checksum: 10c0/a330149fb216ed327ebb8d1687d3fa8c066600a64f22ff2fff6a3ce06a1101d72317950302229bfe0fca9a0f31008d4da2a311585ec2962c5e219297f15aea89
-  languageName: node
-  linkType: hard
-
 "@simplewebauthn/server@npm:^13.1.1":
   version: 13.1.1
   resolution: "@simplewebauthn/server@npm:13.1.1"
@@ -8439,8 +8432,8 @@ __metadata:
   linkType: hard
 
 "@vymalo/medusa-marketplace@file:.yalc/@vymalo/medusa-marketplace::locator=vaam-eat%40workspace%3A.":
-  version: 0.0.1
-  resolution: "@vymalo/medusa-marketplace@file:.yalc/@vymalo/medusa-marketplace#.yalc/@vymalo/medusa-marketplace::hash=28de3c&locator=vaam-eat%40workspace%3A."
+  version: 0.0.2
+  resolution: "@vymalo/medusa-marketplace@file:.yalc/@vymalo/medusa-marketplace#.yalc/@vymalo/medusa-marketplace::hash=ee6d73&locator=vaam-eat%40workspace%3A."
   peerDependencies:
     "@medusajs/admin-sdk": 2.8.2
     "@medusajs/cli": 2.8.2
@@ -8457,7 +8450,7 @@ __metadata:
     "@mikro-orm/postgresql": 6.4.3
     awilix: ^8.0.1
     pg: ^8.13.0
-  checksum: 10c0/4d90d81d0c0da05519db0313a8b7c2606bc2646d971cccecf43f3b19839fa501799c1bb30d946b46c16e80efea85ddcbb5b7ef776abfa1ca10b0bffee3850fdc
+  checksum: 10c0/7f8fae28cc2d8a543fa38aaf9f9af682826ffda8f5104602c0cd15002e98ccf70ad2fd8d3f24fc4d12751ce95423bdf7ef44c4beae530f79a7a191ce6cc1c156
   languageName: node
   linkType: hard
 
@@ -8481,8 +8474,8 @@ __metadata:
   linkType: hard
 
 "@vymalo/medusa-webauthn@file:.yalc/@vymalo/medusa-webauthn::locator=vaam-eat%40workspace%3A.":
-  version: 0.0.1
-  resolution: "@vymalo/medusa-webauthn@file:.yalc/@vymalo/medusa-webauthn#.yalc/@vymalo/medusa-webauthn::hash=5475ed&locator=vaam-eat%40workspace%3A."
+  version: 0.0.11
+  resolution: "@vymalo/medusa-webauthn@file:.yalc/@vymalo/medusa-webauthn#.yalc/@vymalo/medusa-webauthn::hash=484a81&locator=vaam-eat%40workspace%3A."
   dependencies:
     "@simplewebauthn/server": "npm:^13.1.1"
     "@simplewebauthn/types": "npm:^12.0.0"
@@ -8502,13 +8495,13 @@ __metadata:
     "@mikro-orm/postgresql": 6.4.3
     awilix: ^8.0.1
     pg: ^8.13.0
-  checksum: 10c0/d61444017ff93737740277be03f3e4676224e165a952fc3e239bc2be24751f70bfd255776b94a9a24da6c94b8e1941fb1492cb34382ce78d862057775d67dd46
+  checksum: 10c0/086938e3d25b9f104fde54541efbdfa08a6fa8ba31a7b61c5178fdcb32a0c017497492f954b61b96d3e0828d899fb1faf6cbecba650dd8d3741d2bca92e71057
   languageName: node
   linkType: hard
 
 "@vymalo/medusa-wishlist@file:.yalc/@vymalo/medusa-wishlist::locator=vaam-eat%40workspace%3A.":
   version: 0.4.1
-  resolution: "@vymalo/medusa-wishlist@file:.yalc/@vymalo/medusa-wishlist#.yalc/@vymalo/medusa-wishlist::hash=870700&locator=vaam-eat%40workspace%3A."
+  resolution: "@vymalo/medusa-wishlist@file:.yalc/@vymalo/medusa-wishlist#.yalc/@vymalo/medusa-wishlist::hash=5349d1&locator=vaam-eat%40workspace%3A."
   dependencies:
     jsonwebtoken: "npm:^9.0.2"
   peerDependencies:
@@ -8527,7 +8520,7 @@ __metadata:
     "@mikro-orm/postgresql": 6.4.3
     awilix: ^8.0.1
     pg: ^8.13.0
-  checksum: 10c0/e071f4bcd53ace7d1adf8520a8ae31c71521faf153f0aaf2546e98e58fdf864c433777c3416a6453afaf529435f75ff018746b56e9eeb33358a595da62688991
+  checksum: 10c0/51d334b151f37a7f66afc85e4a9f709d9df17128736183292dabe16eab8bb08c4479595962e419da6b8c22e1810a1a3cf9fd567f2e10157bf19ddce4f4e9ea1b
   languageName: node
   linkType: hard
 
@@ -16568,7 +16561,6 @@ __metadata:
     "@mikro-orm/knex": "npm:6.4.3"
     "@mikro-orm/migrations": "npm:6.4.3"
     "@mikro-orm/postgresql": "npm:6.4.3"
-    "@simplewebauthn/browser": "npm:^13.1.0"
     "@simplewebauthn/server": "npm:^13.1.1"
     "@simplewebauthn/types": "npm:^12.0.0"
     "@swc/core": "npm:1.5.7"

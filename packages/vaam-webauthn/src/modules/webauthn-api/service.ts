@@ -2,7 +2,7 @@ import type {
 	AuthIdentityDTO,
 	Logger,
 } from "@medusajs/framework/types";
-import { MedusaError } from "@medusajs/framework/utils";
+import { MedusaError, isString } from "@medusajs/framework/utils";
 import {
 	generateAuthenticationOptions,
 	generateRegistrationOptions,
@@ -35,8 +35,23 @@ class WebAuthnApiService {
 	protected readonly logger: Logger;
 
 	constructor({ logger }: InjectedDependencies, options: Options) {
-		this.config = options;
+		this.config = WebAuthnApiService.validateOptions(options);
 		this.logger = logger;
+	}
+
+	public static validateOptions(options: Options): Options {
+		if (!isString(options.rpName)) {
+			throw new Error('Missing required option: rpName');
+		}
+
+		if (!isString(options.rpID)) {
+			throw new Error('Missing required option: rpID');
+		}
+
+		return {
+			rpName: options.rpName,
+			rpID: options.rpID,
+		};
 	}
 
 	public getProviderIdentity(authIdentity?: AuthIdentityDTO) {

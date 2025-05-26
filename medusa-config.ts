@@ -95,7 +95,10 @@ module.exports = defineConfig({
 		},
 		{
 			resolve: "@vymalo/medusa-webauthn",
-			options: {},
+			options: {
+				rpName: process.env.WEBAUTHN_RP_NAME,
+				rpID: process.env.WEBAUTHN_RP_ID,
+			},
 		},
 	],
 	projectConfig: {
@@ -210,18 +213,9 @@ module.exports = defineConfig({
 		},
 		{
 			resolve: "@medusajs/medusa/auth",
+			dependencies: ["cache", "logger", "webauthn_api"],
 			options: {
 				providers: [
-					{
-						resolve: "@vymalo/medusa-keycloak",
-						id: "vaam-oauth2",
-						options: {
-							url: process.env.KEYCLOAK_URL,
-							realm: process.env.KEYCLOAK_REALM,
-							clientId: process.env.KEYCLOAK_CLIENT_SECRET,
-							clientSecret: process.env.KEYCLOAK_CLIENT_SECRET,
-						},
-					},
 					{
 						resolve: "@vymalo/medusa-webauthn/auth",
 						id: "vaam-webauthn",

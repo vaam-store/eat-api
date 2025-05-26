@@ -1,10 +1,12 @@
 {
 	"name": "@vymalo/medusa-marketplace",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"description": "A starter for Medusa projects.",
 	"author": "Medusa (https://medusajs.com)",
 	"license": "MIT",
-	"files": [".medusa/server"],
+	"files": [
+		".medusa/server"
+	],
 	"exports": {
 		"./package.json": "./package.json",
 		"./workflows": "./.medusa/server/src/workflows/index.js",
@@ -79,8 +81,5 @@
 	},
 	"engines": {
 		"node": ">=20"
-	},
-	"dependencies": {
-		"@vymalo/medusa-marketplace": "file:.yalc/@vymalo/medusa-marketplace"
 	}
 }

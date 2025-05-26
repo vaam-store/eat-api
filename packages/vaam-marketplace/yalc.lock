@@ -1,9 +1,0 @@
-{
-  "version": "v1",
-  "packages": {
-    "@vymalo/medusa-marketplace": {
-      "signature": "d2a5ecfa1585b761feef8285e573180d",
-      "file": true
-    }
-  }
-}
