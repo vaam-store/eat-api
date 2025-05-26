@@ -23,6 +23,7 @@ type InjectedDependencies = {
 type Options = {
 	rpName: string;
 	rpID: string;
+	origin: string;
 };
 class WebAuthnApiService {
 	public static readonly identifier = 'webauthn_api';
@@ -45,9 +46,14 @@ class WebAuthnApiService {
 			throw new Error('Missing required option: rpID');
 		}
 
+		if (!isString(options.origin)) {
+			throw new Error('Missing required option: origin');
+		}
+
 		return {
 			rpName: options.rpName,
 			rpID: options.rpID,
+			origin: options.origin,
 		};
 	}
 
@@ -74,7 +80,7 @@ class WebAuthnApiService {
 					residentKey: 'preferred',
 					userVerification: 'preferred',
 					// Optional
-					authenticatorAttachment: 'platform',
+					//authenticatorAttachment: 'platform',
 				},
 			});
 
@@ -115,26 +121,19 @@ class WebAuthnApiService {
 
 	public async verifyRegistrationResponse({
 		body,
-		authIdentity,
+		options,
 	}: {
 		body: RegistrationResponseJSON;
-		authIdentity: AuthIdentityDTO;
+		options: PublicKeyCredentialCreationOptionsJSON;
 	}) {
-		const providerIdentity = this.getProviderIdentity(authIdentity);
-		const previousOptions =
-			providerIdentity?.provider_metadata?.creationOptions;
-		if (!previousOptions) {
-			return false;
-		}
-
-		const { verified } = await verifyRegistrationResponse({
+		const { verified, registrationInfo } = await verifyRegistrationResponse({
 			response: body,
-			expectedChallenge: previousOptions.challenge,
-			expectedOrigin: origin,
+			expectedChallenge: options.challenge,
+			expectedOrigin: this.config.origin.split(','),
 			expectedRPID: this.config.rpID,
 		});
 
-		return verified;
+		return { verified, registrationInfo };
 	}
 
 	public async verifyAuthenticationResponse({
@@ -163,11 +162,11 @@ class WebAuthnApiService {
 		const { verified } = await verifyAuthenticationResponse({
 			response: body.authJSON,
 			expectedChallenge: previousOptions.challenge,
-			expectedOrigin: origin,
+			expectedOrigin: this.config.origin.split(','),
 			expectedRPID: this.config.rpID,
 			credential: {
 				id: body.authJSON.id,
-				publicKey: passkey.publicKey,
+				publicKey: new Uint8Array(Buffer.from(passkey.publicKey, 'base64')),
 				counter: passkey.counter,
 				transports: passkey.transports,
 			},

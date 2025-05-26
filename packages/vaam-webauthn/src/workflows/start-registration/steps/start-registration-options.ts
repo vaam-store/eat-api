@@ -17,10 +17,16 @@ const validateRegistrationOptionsStep = createStep(
 			WebAuthnApiService.identifier,
 		);
 
-		const authIdentity = await authService.retrieveAuthIdentity(authIdentityId);
+		const authIdentity = await authService.retrieveAuthIdentity(
+			authIdentityId,
+			{
+				relations: ['provider_identities'],
+			},
+		);
+
 		const providerIdentity =
 			webauthnApiService.getProviderIdentity(authIdentity);
-		if (!providerIdentity) {
+		if (!providerIdentity?.entity_id || !providerIdentity.provider_metadata) {
 			throw new MedusaError(
 				MedusaError.Types.INVALID_DATA,
 				'user not registred? How?',
@@ -31,6 +37,8 @@ const validateRegistrationOptionsStep = createStep(
 			providerIdentity?.entity_id,
 		);
 
+		providerIdentity.provider_metadata.creationOptions = options;
+		authService.updateProviderIdentities(providerIdentity);
 		return new StepResponse(options);
 	},
 );

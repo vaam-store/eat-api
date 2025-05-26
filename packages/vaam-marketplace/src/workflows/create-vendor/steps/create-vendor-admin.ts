@@ -12,7 +12,6 @@ type CreateVendorAdminStepInput = {
 const createVendorAdminStep = createStep(
 	'create-vendor-admin-step',
 	async (adminData: CreateVendorAdminStepInput, { container }) => {
-		console.log('adminData', adminData);
 		const marketplaceModuleService: MarketplaceModuleService =
 			container.resolve(MARKETPLACE_MODULE);
 

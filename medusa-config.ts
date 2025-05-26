@@ -98,6 +98,7 @@ module.exports = defineConfig({
 			options: {
 				rpName: process.env.WEBAUTHN_RP_NAME,
 				rpID: process.env.WEBAUTHN_RP_ID,
+				origin: process.env.WEBAUTHN_ORIGIN,
 			},
 		},
 	],
@@ -121,8 +122,8 @@ module.exports = defineConfig({
 			cookieSecret: process.env.COOKIE_SECRET!,
 			authMethodsPerActor: {
 				user: ["emailpass"],
-				customer: ["vaam-oauth2", "vaam-webauthn"],
-				vendor: ["vaam-oauth2", "vaam-webauthn"],
+				customer: ["vaam-oauth2", "webauthn"],
+				vendor: ["vaam-oauth2", "webauthn"],
 			},
 		},
 	},
@@ -218,7 +219,7 @@ module.exports = defineConfig({
 				providers: [
 					{
 						resolve: "@vymalo/medusa-webauthn/auth",
-						id: "vaam-webauthn",
+						id: "webauthn",
 						options: {},
 					},
 					{

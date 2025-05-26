@@ -17,14 +17,22 @@ export const POST = async (
 		);
 	}
 
-	const { result } = await validateRegistrationOptionsWorkflow(req.scope).run({
-		input: {
-			authIdentityId: req.auth_context.auth_identity_id,
-			payload: req.validatedBody,
-		},
-	});
+	try {
+		const { result } = await validateRegistrationOptionsWorkflow(req.scope).run({
+			input: {
+				authIdentityId: req.auth_context.auth_identity_id,
+				payload: req.body,
+			},
+		});
 
-	res.json({
-		result: result,
-	});
+		res.json({
+			result: result,
+		});
+	} catch (e) {
+		console.error('miaou =>', e);
+
+		res.status(400).send({
+			e,
+		});
+	}
 };

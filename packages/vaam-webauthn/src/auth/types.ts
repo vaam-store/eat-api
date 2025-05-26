@@ -3,12 +3,13 @@ import type {
 	AuthenticationResponseJSON,
 	AuthenticatorTransportFuture,
 	CredentialDeviceType,
+	PublicKeyCredentialCreationOptionsJSON,
+	PublicKeyCredentialRequestOptionsJSON,
 } from '@simplewebauthn/types';
 
 export type Passkey = {
 	id: Base64URLString;
-	publicKey: Uint8Array;
-	webauthnUserID: Base64URLString;
+	publicKey: string;
 	counter: number;
 	deviceType: CredentialDeviceType;
 	backedUp: boolean;

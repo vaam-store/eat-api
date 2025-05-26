@@ -1,6 +1,8 @@
-import { StepResponse, createStep } from '@medusajs/framework/workflows-sdk';
+import { createStep, StepResponse } from '@medusajs/framework/workflows-sdk';
 import type { RegistrationResponseJSON } from '@simplewebauthn/types';
 import WebAuthnApiService from '../../../modules/webauthn-api/service';
+import { MedusaError } from '@medusajs/framework/utils';
+import type { Passkey } from '../../../auth/types';
 
 export type ValidateRegistrationOptionsStepInput = {
 	payload: RegistrationResponseJSON;
@@ -18,13 +20,54 @@ const validateRegistrationOptionsStep = createStep(
 			WebAuthnApiService.identifier,
 		);
 
-		const authIdentity = await authService.retrieveAuthIdentity(authIdentityId);
-		const success = await webauthnApiService.verifyRegistrationResponse({
+		const authIdentity = await authService.retrieveAuthIdentity(
+			authIdentityId,
+			{
+				relations: ['provider_identities'],
+			},
+		);
+
+		const providerIdentity =
+			webauthnApiService.getProviderIdentity(authIdentity);
+
+		if (!providerIdentity?.provider_metadata?.creationOptions || !providerIdentity.provider_metadata) {
+			throw new MedusaError(
+				MedusaError.Types.INVALID_DATA,
+				'user not registred? How?',
+			);
+		}
+
+		const { verified, registrationInfo } = await webauthnApiService.verifyRegistrationResponse({
 			body: payload,
-			authIdentity,
+			options: providerIdentity.provider_metadata?.creationOptions,
 		});
 
-		return new StepResponse(success);
+		const {
+			credential,
+			credentialDeviceType,
+			credentialBackedUp,
+		} = registrationInfo!;
+
+		const newPasskey: Passkey = {
+			// A unique identifier for the credential
+			id: credential.id,
+			// The public key bytes, used for subsequent authentication signature verification
+			publicKey: Buffer.from(credential.publicKey).toString('base64'),
+			// The number of times the authenticator has been used on this site so far
+			counter: credential.counter,
+			// How the browser can talk with this credential's authenticator
+			transports: credential.transports,
+			// Whether the passkey is single-device or multi-device
+			deviceType: credentialDeviceType,
+			// Whether the passkey has been backed up in some way
+			backedUp: credentialBackedUp,
+		};
+
+		providerIdentity.provider_metadata.passkeys = providerIdentity.provider_metadata.passkeys ?? {};
+		providerIdentity.provider_metadata.passkeys[credential.id] = newPasskey;
+		authService.updateProviderIdentities(providerIdentity);
+
+		return new StepResponse(verified);
 	},
 );
 
