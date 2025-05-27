@@ -36,7 +36,7 @@ const removeOldNonPasskeyAuthIdentitiesStep = createStep(
 				relations: ['provider_identities'],
 				filters: {
 					updated_at: {
-						$lt: new Date(Date.now() - 1_000 * 60),
+						$lt: new Date(Date.now() - 1_000 * 5),
 					},
 				},
 			},
