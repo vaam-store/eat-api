@@ -122,8 +122,8 @@ module.exports = defineConfig({
 			cookieSecret: process.env.COOKIE_SECRET!,
 			authMethodsPerActor: {
 				user: ["emailpass"],
-				customer: ["vaam-oauth2", "webauthn"],
-				vendor: ["vaam-oauth2", "webauthn"],
+				customer: ["webauthn"],
+				vendor: ["webauthn"],
 			},
 		},
 	},
