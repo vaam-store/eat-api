@@ -30,7 +30,6 @@ const removeOldNonPasskeyAuthIdentitiesStep = createStep(
 				provider_identities: {
 					provider: WebAuthnAuthService.identifier,
 				},
-				app_metadata: undefined,
 			},
 			{
 				relations: ['provider_identities'],
