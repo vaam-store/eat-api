@@ -1,8 +1,8 @@
-import { createStep, StepResponse } from '@medusajs/framework/workflows-sdk';
-import type { RegistrationResponseJSON } from '@simplewebauthn/types';
-import WebAuthnApiService from '../../../modules/webauthn-api/service';
 import { MedusaError } from '@medusajs/framework/utils';
+import { StepResponse, createStep } from '@medusajs/framework/workflows-sdk';
+import type { RegistrationResponseJSON } from '@simplewebauthn/types';
 import type { Passkey } from '../../../auth/types';
+import WebAuthnApiService from '../../../modules/webauthn-api/service';
 
 export type ValidateRegistrationOptionsStepInput = {
 	payload: RegistrationResponseJSON;
@@ -46,8 +46,15 @@ const validateRegistrationOptionsStep = createStep(
 				options: providerIdentity.provider_metadata?.creationOptions,
 			});
 
+		if (!registrationInfo) {
+			throw new MedusaError(
+				MedusaError.Types.INVALID_DATA,
+				'for some reason, the registrationInfo is not available. hmmm...',
+			);
+		}
+
 		const { credential, credentialDeviceType, credentialBackedUp } =
-			registrationInfo!;
+			registrationInfo;
 
 		const newPasskey: Passkey = {
 			// A unique identifier for the credential

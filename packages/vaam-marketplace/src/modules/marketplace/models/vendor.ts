@@ -1,6 +1,6 @@
+import type { InferTypeOf } from '@medusajs/framework/types';
 import { model } from '@medusajs/framework/utils';
 import VendorAdmin from './vendor-admin';
-import type { InferTypeOf } from '@medusajs/framework/types';
 
 const Vendor = model.define('vendor', {
 	id: model.id().primaryKey(),
@@ -10,6 +10,6 @@ const Vendor = model.define('vendor', {
 	admins: model.hasMany(() => VendorAdmin),
 });
 
-export type Vendor = InferTypeOf<typeof Vendor>
+export type Vendor = InferTypeOf<typeof Vendor>;
 
 export default Vendor;

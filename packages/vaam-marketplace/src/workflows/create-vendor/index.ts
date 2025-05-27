@@ -7,9 +7,9 @@ import {
 	setAuthAppMetadataStep,
 	useQueryGraphStep,
 } from '@medusajs/medusa/core-flows';
+import type { Vendor } from '../../modules/marketplace/models/vendor';
 import createVendorStep from './steps/create-vendor';
 import createVendorAdminStep from './steps/create-vendor-admin';
-import type { Vendor } from '../../modules/marketplace/models/vendor';
 
 export type CreateVendorWorkflowInput = {
 	name: string;

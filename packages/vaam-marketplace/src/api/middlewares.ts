@@ -1,16 +1,16 @@
 import {
-	authenticate,
-	defineMiddlewares,
 	type MedusaNextFunction,
 	type MedusaRequest,
 	type MedusaResponse,
+	authenticate,
+	defineMiddlewares,
 	validateAndTransformBody,
 } from '@medusajs/framework/http';
-import { AdminCreateProduct } from '@medusajs/medusa/api/admin/products/validators';
-import { PostVendorCreateSchema } from './vendors/route';
-import cors from 'cors';
-import { parseCorsOrigins } from '@medusajs/framework/utils';
 import type { ConfigModule } from '@medusajs/framework/types';
+import { parseCorsOrigins } from '@medusajs/framework/utils';
+import { AdminCreateProduct } from '@medusajs/medusa/api/admin/products/validators';
+import cors from 'cors';
+import { PostVendorCreateSchema } from './vendors/route';
 
 export default defineMiddlewares({
 	routes: [
