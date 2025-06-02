@@ -36,16 +36,16 @@
 		"@mikro-orm/migrations": "6.4.3",
 		"@mikro-orm/postgresql": "6.4.3",
 		"@simplewebauthn/server": "^13.1.1",
+		"@vymalo/medusa-apprise": "^1.0.2",
+		"@vymalo/medusa-argon2": "^1.0.9",
 		"@vymalo/medusa-marketplace": "file:.yalc/@vymalo/medusa-marketplace",
 		"@vymalo/medusa-meilisearch": "^1.0.14",
 		"@vymalo/medusa-minio": "^1.0.7",
-		"@vymalo/medusa-webauthn": "file:.yalc/@vymalo/medusa-webauthn",
+		"@vymalo/medusa-webauthn": "^1.0.2",
 		"@vymalo/medusa-wishlist": "file:.yalc/@vymalo/medusa-wishlist",
-		"argon2": "^0.43.0",
 		"awilix": "^8",
 		"medusa-wishlist-plugin": "^0.4.1",
-		"pg": "^8.16.0",
-		"superjson": "^2.2.2"
+		"pg": "^8.16.0"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "1.9.4",
@@ -54,7 +54,6 @@
 		"@simplewebauthn/types": "^12.0.0",
 		"@swc/core": "1.5.7",
 		"@swc/jest": "^0.2.36",
-		"@types/argon2": "^0.15.4",
 		"@types/jest": "^29.5.13",
 		"@types/node": "^20.0.0",
 		"@types/react": "^18.3.2",

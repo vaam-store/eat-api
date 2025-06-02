@@ -7752,15 +7752,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/argon2@npm:^0.15.4":
-  version: 0.15.4
-  resolution: "@types/argon2@npm:0.15.4"
-  dependencies:
-    argon2: "npm:*"
-  checksum: 10c0/ededf5488cdd4efa72c5336354318295807da3fc69746a49632ae6b76b2375068a17feb9fe3fb948b76e0ea2b3ea66725db2f96d77e1afad417c0c653137fdfe
-  languageName: node
-  linkType: hard
-
 "@types/argparse@npm:1.0.38":
   version: 1.0.38
   resolution: "@types/argparse@npm:1.0.38"
@@ -8083,9 +8074,28 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@vymalo/medusa-apprise@npm:^1.0.2":
+  version: 1.0.2
+  resolution: "@vymalo/medusa-apprise@npm:1.0.2"
+  dependencies:
+    axios: "npm:^1.9.0"
+  checksum: 10c0/1c2a707349120b448de3e4aec597d0628273e1bb755839163b2c29b87c0d597ab2014ceb262269bb0f4b964ede683044b985f36334d5cf2a8230b9838f751187
+  languageName: node
+  linkType: hard
+
+"@vymalo/medusa-argon2@npm:^1.0.9":
+  version: 1.0.9
+  resolution: "@vymalo/medusa-argon2@npm:1.0.9"
+  dependencies:
+    argon2: "npm:^0.43.0"
+    superjson: "npm:*"
+  checksum: 10c0/86ea0d6888af7a5a9503ea7b996813e545dfb4ebbf1eea1f79c7f3ef5d380d73d158c4bc3b640beea16e1d21fbaad7b263745e30d49a098891b9f70dad3e9d2e
+  languageName: node
+  linkType: hard
+
 "@vymalo/medusa-marketplace@file:.yalc/@vymalo/medusa-marketplace::locator=vaam-eat%40workspace%3A.":
   version: 0.0.7
-  resolution: "@vymalo/medusa-marketplace@file:.yalc/@vymalo/medusa-marketplace#.yalc/@vymalo/medusa-marketplace::hash=6a6093&locator=vaam-eat%40workspace%3A."
+  resolution: "@vymalo/medusa-marketplace@file:.yalc/@vymalo/medusa-marketplace#.yalc/@vymalo/medusa-marketplace::hash=3c5b6c&locator=vaam-eat%40workspace%3A."
   peerDependencies:
     "@medusajs/admin-sdk": 2.8.2
     "@medusajs/cli": 2.8.2
@@ -8102,7 +8112,7 @@ __metadata:
     "@mikro-orm/postgresql": 6.4.3
     awilix: ^8.0.1
     pg: ^8.13.0
-  checksum: 10c0/2611812f69b7789bcfb17a21b892ae92f67dceb255b6c9c111e66bbb95e9e7ed8a3f7b44c96fbdc99fa1548fdf23f5999b8a9b0e9aeb2d536d7e2b0a0127f47c
+  checksum: 10c0/9cb55f68b2e5d1720968a180634d58253ee900a913d16945a0a9cc446c9bb08a79a25095cfc356d3c1ec33645a9d846d024f8b46c97ccc51d6a93fa0b815ea48
   languageName: node
   linkType: hard
 
@@ -8125,12 +8135,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vymalo/medusa-webauthn@file:.yalc/@vymalo/medusa-webauthn::locator=vaam-eat%40workspace%3A.":
-  version: 0.0.41
-  resolution: "@vymalo/medusa-webauthn@file:.yalc/@vymalo/medusa-webauthn#.yalc/@vymalo/medusa-webauthn::hash=0c8079&locator=vaam-eat%40workspace%3A."
+"@vymalo/medusa-webauthn@npm:^1.0.2":
+  version: 1.0.2
+  resolution: "@vymalo/medusa-webauthn@npm:1.0.2"
   dependencies:
     "@simplewebauthn/server": "npm:^13.1.1"
     "@simplewebauthn/types": "npm:^12.0.0"
+    superjson: "npm:^2.2.2"
   peerDependencies:
     "@medusajs/admin-sdk": 2.8.2
     "@medusajs/cli": 2.8.2
@@ -8147,13 +8158,13 @@ __metadata:
     "@mikro-orm/postgresql": 6.4.3
     awilix: ^8.0.1
     pg: ^8.13.0
-  checksum: 10c0/0a19ce861c9e1aae7ad805803e11c3b8fc7a7bc989a6ad34354c8998150c5b008b4c8d3c886522b0db786e77f9d0651e525522e4b21cea9a207e8cbfd20c6041
+  checksum: 10c0/01f51830744500223b4feb11cfe636885fc7a6186bb1f2922dee533725c1a3f5f52999a1c68ac982e226d907316fd5807c4278acf6b2859648b66b0b5bd7722d
   languageName: node
   linkType: hard
 
 "@vymalo/medusa-wishlist@file:.yalc/@vymalo/medusa-wishlist::locator=vaam-eat%40workspace%3A.":
   version: 0.4.1
-  resolution: "@vymalo/medusa-wishlist@file:.yalc/@vymalo/medusa-wishlist#.yalc/@vymalo/medusa-wishlist::hash=870700&locator=vaam-eat%40workspace%3A."
+  resolution: "@vymalo/medusa-wishlist@file:.yalc/@vymalo/medusa-wishlist#.yalc/@vymalo/medusa-wishlist::hash=5349d1&locator=vaam-eat%40workspace%3A."
   dependencies:
     jsonwebtoken: "npm:^9.0.2"
   peerDependencies:
@@ -8172,7 +8183,7 @@ __metadata:
     "@mikro-orm/postgresql": 6.4.3
     awilix: ^8.0.1
     pg: ^8.13.0
-  checksum: 10c0/e071f4bcd53ace7d1adf8520a8ae31c71521faf153f0aaf2546e98e58fdf864c433777c3416a6453afaf529435f75ff018746b56e9eeb33358a595da62688991
+  checksum: 10c0/51d334b151f37a7f66afc85e4a9f709d9df17128736183292dabe16eab8bb08c4479595962e419da6b8c22e1810a1a3cf9fd567f2e10157bf19ddce4f4e9ea1b
   languageName: node
   linkType: hard
 
@@ -8384,7 +8395,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"argon2@npm:*, argon2@npm:^0.43.0":
+"argon2@npm:^0.43.0":
   version: 0.43.0
   resolution: "argon2@npm:0.43.0"
   dependencies:
@@ -8523,7 +8534,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:^1.8.2":
+"axios@npm:^1.8.2, axios@npm:^1.9.0":
   version: 1.9.0
   resolution: "axios@npm:1.9.0"
   dependencies:
@@ -15395,7 +15406,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"superjson@npm:^2.2.2":
+"superjson@npm:*, superjson@npm:^2.2.2":
   version: 2.2.2
   resolution: "superjson@npm:2.2.2"
   dependencies:
@@ -16070,17 +16081,17 @@ __metadata:
     "@simplewebauthn/types": "npm:^12.0.0"
     "@swc/core": "npm:1.5.7"
     "@swc/jest": "npm:^0.2.36"
-    "@types/argon2": "npm:^0.15.4"
     "@types/jest": "npm:^29.5.13"
     "@types/node": "npm:^20.0.0"
     "@types/react": "npm:^18.3.2"
     "@types/react-dom": "npm:^18.2.25"
+    "@vymalo/medusa-apprise": "npm:^1.0.2"
+    "@vymalo/medusa-argon2": "npm:^1.0.9"
     "@vymalo/medusa-marketplace": "file:.yalc/@vymalo/medusa-marketplace"
     "@vymalo/medusa-meilisearch": "npm:^1.0.14"
     "@vymalo/medusa-minio": "npm:^1.0.7"
-    "@vymalo/medusa-webauthn": "file:.yalc/@vymalo/medusa-webauthn"
+    "@vymalo/medusa-webauthn": "npm:^1.0.2"
     "@vymalo/medusa-wishlist": "file:.yalc/@vymalo/medusa-wishlist"
-    argon2: "npm:^0.43.0"
     awilix: "npm:^8"
     jest: "npm:^29.7.0"
     medusa-wishlist-plugin: "npm:^0.4.1"
@@ -16088,7 +16099,6 @@ __metadata:
     prop-types: "npm:^15.8.1"
     react: "npm:^18.2.0"
     react-dom: "npm:^18.2.0"
-    superjson: "npm:^2.2.2"
     ts-node: "npm:^10.9.2"
     typescript: "npm:^5.6.2"
     vite: "npm:^5.2.11"

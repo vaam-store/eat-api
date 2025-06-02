@@ -223,12 +223,13 @@ module.exports = defineConfig({
 						options: {},
 					},
 					{
-						resolve: "./src/modules/argon-emailpass",
+						resolve: "@vymalo/medusa-argon2",
 						id: "emailpass",
 						options: {
 							argon2: {
-								hashLength: process.env.ARGON_HASH_LENGTH,
-								parallelism: process.env.ARGON_PARALLELISM,
+								timeCost: 3,
+								memoryCost: 12288,
+								parallelism: 2,
 							}
 						},
 					},
